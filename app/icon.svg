@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Balloon body -->
+  <ellipse cx="16" cy="13" rx="10" ry="12" fill="#e91e8c"/>
+  <!-- Shine highlight -->
+  <ellipse cx="12" cy="8" rx="3" ry="3.5" fill="rgba(255,255,255,0.35)"/>
+  <!-- Knot -->
+  <path d="M14.5 24.5 Q16 26.5 17.5 24.5 Q16 28 14.5 24.5Z" fill="#ad1457"/>
+  <!-- String -->
+  <path d="M16 26 Q18.5 28.5 14.5 31" stroke="#ad1457" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>
