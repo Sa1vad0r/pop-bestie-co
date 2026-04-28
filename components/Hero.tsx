@@ -4,7 +4,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Gradient background mimicking balloon photo */}
+      {/* Gradient background */}
       <div
         className="absolute inset-0"
         style={{

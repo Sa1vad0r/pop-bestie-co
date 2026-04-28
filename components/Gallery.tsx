@@ -1,12 +1,19 @@
-const placeholders = [
-  { span: "col-span-2 row-span-2", label: "Birthday Setup" },
-  { span: "", label: "Baby Shower" },
-  { span: "", label: "Bridal Shower" },
-  { span: "", label: "Balloon Garland" },
-  { span: "col-span-2", label: "Luxe Experience Setup" },
-  { span: "", label: "Character Prop" },
-  { span: "", label: "Corporate Event" },
-  { span: "", label: "Custom Backdrop" },
+import Image from "next/image";
+
+const photos = [
+  { src: "/images/gallery-sesame-street.jpg", alt: "Sesame Street Birthday Setup", span: "col-span-1 row-span-2" },
+  { src: "/images/gallery-blue-sage-gold.jpg", alt: "Blue, Sage & Gold Backdrop", span: "" },
+  { src: "/images/gallery-wildflower.jpg", alt: "A Little Wildflower Baby Shower", span: "" },
+  { src: "/images/gallery-hunny.jpg", alt: "A Little Hunny Baby Shower", span: "" },
+  { src: "/images/gallery-baby-guerrero.jpg", alt: "Baby Guerrero Setup", span: "" },
+  { src: "/images/gallery-mrs-esquivel.jpg", alt: "Future Mrs. Esquivel Bridal Shower", span: "col-span-1 row-span-2" },
+  { src: "/images/gallery-baby-losoya.jpg", alt: "Baby Losoya Safari Setup", span: "" },
+  { src: "/images/gallery-twenty-fine.jpg", alt: "Twenty Fine Birthday", span: "" },
+  { src: "/images/gallery-sonic.jpg", alt: "Kobe Turns 6 — Sonic Theme", span: "" },
+  { src: "/images/gallery-xoxo.jpg", alt: "XOXO Valentine Setup", span: "" },
+  { src: "/images/gallery-adventure-awaits.jpg", alt: "Adventure Awaits Baby Shower", span: "col-span-2" },
+  { src: "/images/gallery-baby-legg-1.jpg", alt: "Baby Legg Is Brewing", span: "" },
+  { src: "/images/gallery-baby-legg-2.jpg", alt: "Baby Legg Luxe Setup", span: "" },
 ];
 
 export default function Gallery() {
@@ -26,38 +33,29 @@ export default function Gallery() {
           A peek at the magic we bring to every event setup.
         </p>
 
-        {/* Responsive grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[200px]">
-          {placeholders.map((item, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[220px]">
+          {photos.map((photo) => (
             <div
-              key={i}
-              className={`${item.span} rounded-2xl overflow-hidden bg-brand-pink/10 border-2 border-brand-pink/20 flex items-center justify-center group cursor-pointer hover:border-brand-pink transition-colors`}
+              key={photo.src}
+              className={`${photo.span} rounded-2xl overflow-hidden group`}
             >
-              <div className="text-center p-4">
-                <div className="w-10 h-10 rounded-full bg-brand-pink/20 flex items-center justify-center mx-auto mb-2">
-                  <svg
-                    className="w-5 h-5 text-brand-pink/60"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
+              <div className="relative w-full h-full">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-end p-3">
+                  <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow">
+                    {photo.alt}
+                  </span>
                 </div>
-                <p className="text-brand-pink/70 text-xs font-medium">{item.label}</p>
               </div>
             </div>
           ))}
         </div>
-
-        <p className="text-center mt-8 text-gray-400 text-sm">
-          📸 Photos coming soon — follow us on Instagram for a sneak peek!
-        </p>
       </div>
     </section>
   );

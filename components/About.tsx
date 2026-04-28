@@ -1,8 +1,9 @@
+import Image from "next/image";
+
 export default function About() {
   return (
     <section id="about" className="py-24 bg-brand-soft">
       <div className="max-w-5xl mx-auto px-6">
-        {/* Section label */}
         <p className="text-center text-brand-pink text-xs font-semibold tracking-[0.3em] uppercase mb-3">
           The Faces Behind the Magic
         </p>
@@ -14,19 +15,16 @@ export default function About() {
         </h2>
 
         <div className="flex flex-col md:flex-row gap-12 items-center">
-          {/* Placeholder portraits */}
-          <div className="flex gap-4 shrink-0">
-            <div className="flex flex-col items-center gap-2">
-              <div className="w-36 h-36 rounded-full bg-brand-blush border-4 border-brand-pink/30 flex items-center justify-center">
-                <span className="text-brand-pink/50 text-sm font-medium">Nancy</span>
-              </div>
-              <span className="text-sm font-semibold text-brand-deep">Nancy</span>
-            </div>
-            <div className="flex flex-col items-center gap-2 mt-8">
-              <div className="w-36 h-36 rounded-full bg-brand-blush border-4 border-brand-pink/30 flex items-center justify-center">
-                <span className="text-brand-pink/50 text-sm font-medium">Jalynn</span>
-              </div>
-              <span className="text-sm font-semibold text-brand-deep">Jalynn</span>
+          {/* Real photo */}
+          <div className="shrink-0">
+            <div className="w-72 h-80 md:w-80 md:h-96 rounded-3xl overflow-hidden border-4 border-brand-pink/20 shadow-xl">
+              <Image
+                src="/images/about-nancy-jalynn.jpg"
+                alt="Nancy and Jalynn — Pop Bestie Co."
+                width={2000}
+                height={2500}
+                className="w-full h-full object-cover object-top"
+              />
             </div>
           </div>
 

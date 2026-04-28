@@ -27,7 +27,9 @@ export default function Footer() {
         {/* Social */}
         <div className="flex gap-4">
           <a
-            href="#"
+            href="https://www.instagram.com/popbestieco?igsh=MWlmZzc2Nzh2NmFhZA=="
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Instagram"
             className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center"
           >
@@ -36,7 +38,9 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="#"
+            href="https://www.facebook.com/share/18HWdNCozk/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer"
             aria-label="Facebook"
             className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center"
           >
