@@ -34,12 +34,15 @@ export default function Footer() {
         className="max-w-7xl mx-auto px-6 lg:px-10 grid grid-cols-1 md:grid-cols-[1fr_auto_auto] gap-12 md:gap-16"
         style={{ paddingTop: "4rem", paddingBottom: "4rem" }}
       >
-
         {/* Brand */}
         <div>
           <p
             className="font-serif mb-3"
-            style={{ fontSize: "2rem", color: "var(--bg-primary)", lineHeight: 1 }}
+            style={{
+              fontSize: "2rem",
+              color: "var(--bg-primary)",
+              lineHeight: 1,
+            }}
           >
             Pop Bestie Co.
           </p>
@@ -51,9 +54,9 @@ export default function Footer() {
               maxWidth: "22rem",
             }}
           >
-            Balloon garlands, custom backdrops, and bespoke event setups — crafted
-            with intention for celebrations that deserve to be remembered.
-            Based in Houston, TX.
+            Balloon garlands, custom backdrops, and bespoke event setups —
+            crafted with intention for celebrations that deserve to be
+            remembered. Based in San Antonio, TX.
           </p>
           {/* Social icons */}
           <div className="flex gap-4">
@@ -111,8 +114,11 @@ export default function Footer() {
           >
             popbestieco@gmail.com
           </a>
-          <p className="text-[11px]" style={{ color: "rgba(240,235,227,0.35)" }}>
-            Houston, TX
+          <p
+            className="text-[11px]"
+            style={{ color: "rgba(240,235,227,0.35)" }}
+          >
+            San Antonio, TX
           </p>
           <a
             href="#contact"
@@ -123,12 +129,22 @@ export default function Footer() {
             }}
           >
             Book Now
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </a>
         </div>
-
       </div>
 
       {/* Bottom bar */}
@@ -140,7 +156,7 @@ export default function Footer() {
           &copy; {new Date().getFullYear()} Pop Bestie Co. All rights reserved.
         </p>
         <p className="text-[11px]" style={{ color: "rgba(240,235,227,0.2)" }}>
-          Houston, TX &nbsp;·&nbsp; Est. 2024
+          San Antonio, TX &nbsp;·&nbsp; Est. 2024
         </p>
       </div>
     </footer>

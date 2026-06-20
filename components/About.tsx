@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const facts = [
   { label: "Est.", value: "2024" },
-  { label: "Based in", value: "Houston, TX" },
+  { label: "Based in", value: "San Antonio, TX" },
   { label: "By day", value: "Nurses" },
   { label: "By passion", value: "Event artists" },
 ];
@@ -19,13 +19,10 @@ export default function About() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-
         {/* Asymmetric split: 44% photo / 56% content */}
         <div className="grid grid-cols-1 lg:grid-cols-[44%_56%] gap-16 lg:gap-24 items-start">
-
           {/* ── Photo panel ───────────────────────────────── */}
           <div className="reveal relative self-start">
-
             {/* Decorative offset frame in accent */}
             <div
               className="absolute pointer-events-none"
@@ -44,7 +41,7 @@ export default function About() {
             >
               <Image
                 src="/images/about-nancy-jalynn.jpg"
-                alt="Nancy and Jalynn — Pop Bestie Co."
+                alt="Jalynn and Nancy  — Pop Bestie Co."
                 fill
                 className="object-cover object-top"
                 sizes="(max-width: 1023px) 100vw, 44vw"
@@ -68,8 +65,11 @@ export default function About() {
                 border: "1px solid var(--border)",
               }}
             >
-              <p className="font-serif text-text-primary" style={{ fontSize: "1.1rem" }}>
-                Nancy &amp; Jalynn
+              <p
+                className="font-serif text-text-primary"
+                style={{ fontSize: "1.1rem" }}
+              >
+                Jalynn &amp; Nancy
               </p>
               <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mt-0.5">
                 Founders, Pop Bestie Co.
@@ -79,7 +79,6 @@ export default function About() {
 
           {/* ── Content panel ─────────────────────────────── */}
           <div className="flex flex-col justify-start lg:pt-6">
-
             {/* Eyebrow */}
             <p
               className="reveal text-[11px] font-medium tracking-[0.28em] uppercase mb-6"
@@ -93,9 +92,9 @@ export default function About() {
               className="reveal font-serif text-text-primary leading-[0.88] mb-8"
               style={{ fontSize: "clamp(3rem, 4.5vw, 4.75rem)" }}
             >
-              Meet Nancy
+              Meet Jalynn
               <br />
-              &amp; Jalynn.
+              &amp; Nancy.
             </h2>
 
             {/* Body */}
@@ -132,7 +131,11 @@ export default function About() {
               style={{ borderTop: "1px solid var(--border)" }}
             >
               {facts.map((f) => (
-                <div key={f.label} className="py-5" style={{ borderBottom: "1px solid var(--border)" }}>
+                <div
+                  key={f.label}
+                  className="py-5"
+                  style={{ borderBottom: "1px solid var(--border)" }}
+                >
                   <p
                     className="text-[10px] tracking-[0.22em] uppercase mb-1.5"
                     style={{ color: "var(--text-muted)" }}
@@ -148,7 +151,6 @@ export default function About() {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
       </div>

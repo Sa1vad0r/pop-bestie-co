@@ -201,7 +201,6 @@ export default function Contact() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-
         {/* Section header */}
         <div className="mb-14">
           <p
@@ -240,26 +239,43 @@ export default function Contact() {
             padding: "clamp(2rem, 5vw, 3.5rem)",
           }}
         >
-
           {/* ── Client Information ────────────────────── */}
           <div>
             <Divider title="Client Information" />
             <div className="space-y-5">
               <div>
                 <label className={label}>Full Name *</label>
-                <input required name="name" type="text" placeholder="Jane Smith"
-                  className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Jane Smith"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className={label}>Phone *</label>
-                  <input required name="phone" type="tel" placeholder="(555) 000-0000"
-                    className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                  <input
+                    required
+                    name="phone"
+                    type="tel"
+                    placeholder="(555) 000-0000"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
                 <div>
                   <label className={label}>Email *</label>
-                  <input required name="email" type="email" placeholder="you@example.com"
-                    className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                  <input
+                    required
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
               </div>
             </div>
@@ -272,25 +288,46 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className={label}>Event Date *</label>
-                  <input required name="eventDate" type="date"
-                    className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                  <input
+                    required
+                    name="eventDate"
+                    type="date"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
                 <div>
                   <label className={label}>Event Time *</label>
-                  <input required name="eventTime" type="time"
-                    className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                  <input
+                    required
+                    name="eventTime"
+                    type="time"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
               </div>
               <div>
                 <label className={label}>Venue / Address *</label>
-                <input required name="eventLocation" type="text" placeholder="123 Party Lane, Houston, TX"
-                  className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                <input
+                  required
+                  name="eventLocation"
+                  type="text"
+                  placeholder="123 Party Lane, San Antonio, TX"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
                 <label className={label}>Type of Event *</label>
                 <div className="flex flex-wrap gap-2">
                   {eventTypes.map((t) => (
-                    <Chip key={t} label={t} active={selectedEventType === t} onClick={() => setSelectedEventType(t)} />
+                    <Chip
+                      key={t}
+                      label={t}
+                      active={selectedEventType === t}
+                      onClick={() => setSelectedEventType(t)}
+                    />
                   ))}
                 </div>
               </div>
@@ -300,10 +337,17 @@ export default function Contact() {
           {/* ── Package Selection ─────────────────────── */}
           <div>
             <Divider title="Package Selection" />
-            <label className={label}>Which package are you interested in?</label>
+            <label className={label}>
+              Which package are you interested in?
+            </label>
             <div className="space-y-2 mt-3">
               {packages.map((pkg) => (
-                <RadioRow key={pkg} label={pkg} active={selectedPackage === pkg} onClick={() => setSelectedPackage(pkg)} />
+                <RadioRow
+                  key={pkg}
+                  label={pkg}
+                  active={selectedPackage === pkg}
+                  onClick={() => setSelectedPackage(pkg)}
+                />
               ))}
             </div>
           </div>
@@ -314,30 +358,54 @@ export default function Contact() {
             <div className="space-y-5">
               <div>
                 <label className={label}>Theme / Inspiration</label>
-                <input name="theme" type="text" placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…"
-                  className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                <input
+                  name="theme"
+                  type="text"
+                  placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
                 <label className={label}>Color Scheme</label>
-                <input name="colorScheme" type="text" placeholder="e.g. Hot pink, white & gold"
-                  className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                <input
+                  name="colorScheme"
+                  type="text"
+                  placeholder="e.g. Hot pink, white & gold"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
                 <label className={label}>Custom Vinyl / Sign Text</label>
-                <input name="vinylText" type="text" placeholder='"Happy 30th, Sofia!" or "Baby Sofia"'
-                  className={`${input} ${inputFocusBorder}`} style={inputBorder} />
+                <input
+                  name="vinylText"
+                  type="text"
+                  placeholder='"Happy 30th, Sofia!" or "Baby Sofia"'
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
                 <label className={label}>Character Prop Needed?</label>
                 <div className="flex gap-3">
                   {(["yes", "no"] as const).map((v) => (
-                    <Chip key={v} label={v === "yes" ? "Yes" : "No"} active={characterProp === v}
-                      onClick={() => setCharacterProp(v)} />
+                    <Chip
+                      key={v}
+                      label={v === "yes" ? "Yes" : "No"}
+                      active={characterProp === v}
+                      onClick={() => setCharacterProp(v)}
+                    />
                   ))}
                 </div>
                 {characterProp === "yes" && (
-                  <input name="characterPropDetails" type="text" placeholder="Please specify the character"
-                    className={`${input} ${inputFocusBorder} mt-3`} style={inputBorder} />
+                  <input
+                    name="characterPropDetails"
+                    type="text"
+                    placeholder="Please specify the character"
+                    className={`${input} ${inputFocusBorder} mt-3`}
+                    style={inputBorder}
+                  />
                 )}
               </div>
             </div>
@@ -349,19 +417,34 @@ export default function Contact() {
             <div className="space-y-5">
               <div>
                 <label className={label}>Special Requests or Notes</label>
-                <textarea name="notes" rows={4} placeholder="Anything else we should know…"
-                  className={`${input} ${inputFocusBorder} resize-none`} style={inputBorder} />
+                <textarea
+                  name="notes"
+                  rows={4}
+                  placeholder="Anything else we should know…"
+                  className={`${input} ${inputFocusBorder} resize-none`}
+                  style={inputBorder}
+                />
               </div>
               <div>
                 <label className={label}>How did you hear about us?</label>
                 <div className="flex flex-wrap gap-2">
                   {referralSources.map((src) => (
-                    <Chip key={src} label={src} active={referral === src} onClick={() => setReferral(src)} />
+                    <Chip
+                      key={src}
+                      label={src}
+                      active={referral === src}
+                      onClick={() => setReferral(src)}
+                    />
                   ))}
                 </div>
                 {referral === "Other" && (
-                  <input name="referralOther" type="text" placeholder="Please specify"
-                    className={`${input} ${inputFocusBorder} mt-3`} style={inputBorder} />
+                  <input
+                    name="referralOther"
+                    type="text"
+                    placeholder="Please specify"
+                    className={`${input} ${inputFocusBorder} mt-3`}
+                    style={inputBorder}
+                  />
                 )}
               </div>
             </div>
@@ -382,29 +465,47 @@ export default function Contact() {
               <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent mb-1.5">
                 Deposit Policy
               </p>
-              <p className="text-text-muted leading-relaxed" style={{ fontSize: "0.875rem" }}>
-                A <strong className="text-text-primary">50% non-refundable deposit</strong> is
-                required to secure your package and event date. The remaining balance is due prior
-                to or on the day of setup.
+              <p
+                className="text-text-muted leading-relaxed"
+                style={{ fontSize: "0.875rem" }}
+              >
+                A{" "}
+                <strong className="text-text-primary">
+                  50% non-refundable deposit
+                </strong>{" "}
+                is required to secure your package and event date. The remaining
+                balance is due prior to or on the day of setup.
               </p>
             </div>
             <div>
               <label className={label}>Preferred Payment Method</label>
               <div className="space-y-2 mt-3">
                 {paymentMethods.map((method) => (
-                  <RadioRow key={method} label={method} active={payment === method} onClick={() => setPayment(method)} />
+                  <RadioRow
+                    key={method}
+                    label={method}
+                    active={payment === method}
+                    onClick={() => setPayment(method)}
+                  />
                 ))}
               </div>
               {payment === "Other" && (
-                <input name="paymentOther" type="text" placeholder="Please specify"
-                  className={`${input} ${inputFocusBorder} mt-3`} style={inputBorder} />
+                <input
+                  name="paymentOther"
+                  type="text"
+                  placeholder="Please specify"
+                  className={`${input} ${inputFocusBorder} mt-3`}
+                  style={inputBorder}
+                />
               )}
             </div>
           </div>
 
           {/* Error */}
           {error && (
-            <p className="text-sm" style={{ color: "#c0392b" }}>{error}</p>
+            <p className="text-sm" style={{ color: "#c0392b" }}>
+              {error}
+            </p>
           )}
 
           {/* Submit */}
@@ -412,7 +513,9 @@ export default function Contact() {
             type="submit"
             disabled={loading}
             className="w-full py-4 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ background: loading ? "var(--text-muted)" : "var(--accent)" }}
+            style={{
+              background: loading ? "var(--text-muted)" : "var(--accent)",
+            }}
           >
             {loading ? "Sending…" : "Submit My Inquiry"}
           </button>
@@ -421,9 +524,9 @@ export default function Contact() {
             className="text-center text-text-muted"
             style={{ fontSize: "0.8rem" }}
           >
-            We&apos;ll be in touch within 24–48 business hours to confirm availability.
+            We&apos;ll be in touch within 24–48 business hours to confirm
+            availability.
           </p>
-
         </form>
       </div>
     </section>

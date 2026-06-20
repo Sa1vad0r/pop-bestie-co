@@ -25,11 +25,12 @@ export default function Navbar() {
       style={{
         background: scrolled ? "rgba(250, 248, 245, 0.92)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+        borderBottom: scrolled
+          ? "1px solid var(--border)"
+          : "1px solid transparent",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-
         {/* Wordmark */}
         <a
           href="#home"
@@ -49,7 +50,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               className="text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 hover:text-accent"
-              style={{ color: scrolled ? "var(--text-muted)" : "rgba(255,255,255,0.85)" }}
+              style={{ color: scrolled ? "var(--text-muted)" : "white" }}
             >
               {l.label}
             </a>
@@ -77,9 +78,11 @@ export default function Navbar() {
                 background: scrolled ? "var(--text-primary)" : "white",
                 opacity: i === 1 && open ? 0 : 1,
                 transform:
-                  i === 0 && open ? "rotate(45deg) translateY(3px)"
-                  : i === 2 && open ? "rotate(-45deg) translateY(-3px)"
-                  : "none",
+                  i === 0 && open
+                    ? "rotate(45deg) translateY(3px)"
+                    : i === 2 && open
+                      ? "rotate(-45deg) translateY(-3px)"
+                      : "none",
               }}
             />
           ))}
@@ -102,7 +105,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-[11px] font-medium tracking-[0.2em] uppercase text-text-muted hover:text-text-primary transition-colors"
+              className="text-[11px] font-medium tracking-[0.2em] uppercase text-text-muted hover:text-text-primary transition-colors hover:text-black"
             >
               {l.label}
             </a>

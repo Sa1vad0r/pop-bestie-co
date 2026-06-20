@@ -18,9 +18,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Pop Bestie Co. | Bespoke Event Setups in Houston",
+  title: "Pop Bestie Co. | Bespoke Event Setups in San Antonio",
   description:
-    "Pop Bestie Co. — balloon garlands, custom backdrops, and unforgettable event setups by Nancy & Jalynn. Based in Houston, TX.",
+    "Pop Bestie Co. — balloon garlands, custom backdrops, and unforgettable event setups by Nancy & Jalynn. Based in San Antonio, TX.",
 };
 
 export default function RootLayout({

@@ -6,7 +6,7 @@ const tickerItems = [
   "Vinyl Lettering",
   "Character Props",
   "Bespoke Setups",
-  "Houston, TX",
+  "San Antonio, TX",
 ];
 
 export default function Hero() {
@@ -36,48 +36,25 @@ export default function Hero() {
         />
       </div>
 
-      {/* ── Desktop: split background ────────────────────── */}
-      <div
-        className="hidden lg:grid absolute inset-0"
-        style={{ gridTemplateColumns: "52% 48%" }}
-      >
-        {/* Left — cream panel */}
-        <div style={{ background: "var(--bg-primary)" }} />
-
-        {/* Right — photo */}
-        <div className="relative">
-          <Image
-            src="/images/hero-balloons.jpg"
-            alt="Balloon garland event setup by Pop Bestie Co."
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="48vw"
-          />
-          {/* Blend left edge into cream */}
-          <div
-            className="absolute inset-y-0 left-0 w-40 z-10"
-            style={{
-              background:
-                "linear-gradient(to right, #FAF8F5 0%, rgba(250,248,245,0.5) 55%, transparent 100%)",
-            }}
-          />
-          {/* Top darken so navbar area is unobtrusive */}
-          <div
-            className="absolute top-0 left-0 right-0 h-32 z-10"
-            style={{
-              background: "linear-gradient(to bottom, #FAF8F5, transparent)",
-            }}
-          />
-          {/* Subtle accent warm glow at bottom */}
-          <div
-            className="absolute bottom-0 left-0 right-0 h-1/4 z-10"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(233,30,140,0.05), transparent)",
-            }}
-          />
-        </div>
+      {/* ── Desktop: full image background with overlay for text ────────────────────── */}
+      <div className="hidden lg:block lg:absolute lg:inset-0 overflow-hidden">
+        <Image
+          src="/images/hero-balloons.jpg"
+          alt="Balloon garland event setup by Pop Bestie Co."
+          fill
+          priority
+          className="object-cover object-center"
+          sizes="100vw"
+        />
+        {/* Semi-transparent dark overlay on left side for text readability */}
+        <div
+          className="absolute inset-y-0 left-0 z-10"
+          style={{
+            width: "52%",
+            background:
+              "linear-gradient(to right, rgba(10,8,6,0.6) 0%, rgba(10,8,6,0.3) 70%, transparent 100%)",
+          }}
+        />
       </div>
 
       {/* ── Content ─────────────────────────────────────── */}
@@ -90,7 +67,6 @@ export default function Hero() {
         }}
       >
         <div className="lg:max-w-[52%]">
-
           {/* Eyebrow */}
           <p
             className="animate-fade-up text-[11px] font-medium tracking-[0.28em] uppercase mb-10"
@@ -99,7 +75,7 @@ export default function Hero() {
               color: "var(--text-muted)",
             }}
           >
-            Est. 2024 &nbsp;·&nbsp; Houston, TX
+            Est. 2024 &nbsp;·&nbsp; San Antonio, TX
           </p>
 
           {/* Headline — white on mobile (over dark image), dark on desktop */}
@@ -143,8 +119,8 @@ export default function Hero() {
             }}
           >
             Custom balloon garlands, stunning backdrops, and bespoke event
-            setups — crafted with intention for celebrations that deserve to
-            be remembered.
+            setups — crafted with intention for celebrations that deserve to be
+            remembered.
           </p>
 
           {/* CTAs */}
@@ -163,7 +139,12 @@ export default function Hero() {
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
               </svg>
             </a>
             <a
@@ -173,7 +154,6 @@ export default function Hero() {
               View Packages
             </a>
           </div>
-
         </div>
       </div>
 
@@ -187,8 +167,11 @@ export default function Hero() {
           color: "var(--text-muted)",
         }}
       >
-        <div className="w-px h-10" style={{ background: "var(--text-muted)", opacity: 0.3 }} />
-        <span className="text-[10px] tracking-[0.25em] uppercase">Scroll</span>
+        {/* <div
+          className="w-px h-10"
+          style={{ background: "var(--text-muted)", opacity: 0.3 }}
+        /> */}
+        {/* <span className="text-[10px] tracking-[0.25em] uppercase">Scroll</span> */}
       </div>
 
       {/* ── Ticker strip ────────────────────────────────── */}
@@ -217,7 +200,12 @@ export default function Hero() {
                   {item}
                   <span
                     className="flex-shrink-0 rounded-full"
-                    style={{ width: "3px", height: "3px", background: "var(--accent)", opacity: 0.7 }}
+                    style={{
+                      width: "3px",
+                      height: "3px",
+                      background: "var(--accent)",
+                      opacity: 0.7,
+                    }}
                   />
                 </span>
               ))}

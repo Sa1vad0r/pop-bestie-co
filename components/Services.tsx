@@ -16,12 +16,12 @@ const packages = [
     featured: true,
   },
   {
-    id: "basic",
-    name: "Basic",
+    id: "Essential",
+    name: "Essential",
     label: null,
     tagline: "Perfect for intimate celebrations.",
     description:
-      "A 6.6 ft wooden backdrop paired with a 7 ft balloon garland on the left in up to two colors. Finished with custom vinyl lettering.",
+      "A 6.6 ft wooden backdrop paired with a balloon Party Columns and a Half Circle Traditional Arch.",
     includes: [
       "6.6 ft wooden backdrop",
       "7 ft balloon garland (up to 2 colors)",
@@ -121,8 +121,19 @@ function CheckIcon() {
 /* ── Arrow icon ─────────────────────────────────────────── */
 function ArrowIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={1.5}
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
     </svg>
   );
 }
@@ -142,7 +153,8 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
       <div
         className="absolute top-0 left-0 w-64 h-64 pointer-events-none"
         style={{
-          background: "radial-gradient(circle at top left, rgba(233,30,140,0.08), transparent 70%)",
+          background:
+            "radial-gradient(circle at top left, rgba(233,30,140,0.08), transparent 70%)",
         }}
       />
 
@@ -168,7 +180,10 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
         >
           {pkg.name} Setup
         </h3>
-        <p className="font-serif italic text-text-muted" style={{ fontSize: "1.1rem" }}>
+        <p
+          className="font-serif italic text-text-muted"
+          style={{ fontSize: "1.1rem" }}
+        >
           {pkg.tagline}
         </p>
       </div>
@@ -182,12 +197,19 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
       </p>
 
       {/* Divider */}
-      <div className="relative z-10 w-10 h-px mb-6" style={{ background: "var(--border)" }} />
+      <div
+        className="relative z-10 w-10 h-px mb-6"
+        style={{ background: "var(--border)" }}
+      />
 
       {/* Includes */}
       <ul className="relative z-10 space-y-2.5 mb-auto">
         {pkg.includes.map((item) => (
-          <li key={item} className="flex items-start gap-3 text-text-muted" style={{ fontSize: "0.8125rem" }}>
+          <li
+            key={item}
+            className="flex items-start gap-3 text-text-muted"
+            style={{ fontSize: "0.8125rem" }}
+          >
             <span className="text-accent mt-[1px]">
               <CheckIcon />
             </span>
@@ -197,10 +219,18 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
       </ul>
 
       {/* Price + CTA */}
-      <div className="relative z-10 flex items-end justify-between mt-10 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+      <div
+        className="relative z-10 flex items-end justify-between mt-10 pt-6"
+        style={{ borderTop: "1px solid var(--border)" }}
+      >
         <div>
-          <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-1">Starting at</p>
-          <p className="font-serif text-text-primary" style={{ fontSize: "3rem", lineHeight: 1 }}>
+          <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-1">
+            Starting at
+          </p>
+          <p
+            className="font-serif text-text-primary"
+            style={{ fontSize: "3rem", lineHeight: 1 }}
+          >
             {pkg.price}
           </p>
         </div>
@@ -258,7 +288,11 @@ function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
       {/* Includes */}
       <ul className="space-y-2 mb-auto">
         {pkg.includes.map((item) => (
-          <li key={item} className="flex items-start gap-2.5 text-text-muted" style={{ fontSize: "0.8rem" }}>
+          <li
+            key={item}
+            className="flex items-start gap-2.5 text-text-muted"
+            style={{ fontSize: "0.8rem" }}
+          >
             <span className="text-text-muted/50 mt-[1px]">
               <CheckIcon />
             </span>
@@ -273,8 +307,13 @@ function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
         style={{ borderTop: "1px solid var(--border)" }}
       >
         <div>
-          <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-0.5">From</p>
-          <p className="font-serif text-text-primary" style={{ fontSize: "2rem", lineHeight: 1 }}>
+          <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-0.5">
+            From
+          </p>
+          <p
+            className="font-serif text-text-primary"
+            style={{ fontSize: "2rem", lineHeight: 1 }}
+          >
             {pkg.price}
           </p>
         </div>
@@ -305,7 +344,6 @@ export default function Services() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-
         {/* ── Section header ────────────────────────────── */}
         <div
           className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 mb-16 pb-16"
@@ -356,7 +394,6 @@ export default function Services() {
           Row 3:   [Luxe]  [Luxe 2.0]  [Luxe 3.0]
         */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 auto-rows-auto">
-
           {/* Signature — featured, 2×2 */}
           <FeaturedCard pkg={signature} />
 
@@ -377,15 +414,12 @@ export default function Services() {
           className="reveal text-center text-text-muted mt-12"
           style={{ fontSize: "0.8rem", letterSpacing: "0.05em" }}
         >
-          All packages include setup and breakdown. Travel fees may apply outside the Houston area.
-          <a
-            href="#contact"
-            className="ml-2 text-accent hover:underline"
-          >
+          All packages include setup and breakdown. Travel fees may apply
+          outside the Houston area.
+          <a href="#contact" className="ml-2 text-accent hover:underline">
             Ask us about your location.
           </a>
         </p>
-
       </div>
     </section>
   );
