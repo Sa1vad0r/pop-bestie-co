@@ -12,16 +12,8 @@ const packages = [
   "Not Sure / Need Help Choosing",
 ];
 
-const eventTypes = [
-  "Birthday",
-  "Baby Shower",
-  "Bridal Shower",
-  "Corporate Event",
-  "Other",
-];
-
+const eventTypes = ["Birthday", "Baby Shower", "Bridal Shower", "Corporate Event", "Other"];
 const referralSources = ["Instagram", "Facebook", "Google", "Referral", "Other"];
-
 const paymentMethods = [
   "Card (Stripe / Square / Website Checkout)",
   "Cash App",
@@ -30,23 +22,81 @@ const paymentMethods = [
   "Other",
 ];
 
-const inputClass =
-  "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 transition";
+const input =
+  "w-full border bg-bg-primary px-4 py-3 text-sm text-text-primary placeholder:text-text-muted/50 focus:outline-none focus:border-accent transition-colors duration-200";
 
-const labelClass = "block text-xs font-semibold tracking-wide text-gray-500 uppercase mb-1.5";
+const inputBorder = { border: "1px solid var(--border)" } as React.CSSProperties;
+const inputFocusBorder = "focus:ring-0";
 
-function SectionHeader({ children }: { children: React.ReactNode }) {
+const label = "block text-[10px] font-medium tracking-[0.22em] uppercase text-text-muted mb-2";
+
+function Divider({ title }: { title: string }) {
   return (
-    <div className="flex items-center gap-3 mb-6">
-      <div className="h-px flex-1 bg-brand-blush" />
-      <h3
-        className="text-xl text-brand-deep shrink-0"
-        style={{ fontFamily: "var(--font-dancing-script)" }}
-      >
-        {children}
-      </h3>
-      <div className="h-px flex-1 bg-brand-blush" />
+    <div className="flex items-center gap-4 mb-8">
+      <div className="w-1 h-5 bg-accent opacity-60 flex-shrink-0" />
+      <span className="text-[11px] font-semibold tracking-[0.25em] uppercase text-text-muted">
+        {title}
+      </span>
+      <div className="flex-1 h-px" style={{ background: "var(--border)" }} />
     </div>
+  );
+}
+
+function Chip({
+  label: text,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="px-4 py-2 text-[11px] font-medium tracking-[0.1em] transition-all duration-200"
+      style={{
+        border: active ? "1px solid var(--accent)" : "1px solid var(--border)",
+        background: active ? "rgba(233,30,140,0.06)" : "var(--bg-primary)",
+        color: active ? "var(--accent)" : "var(--text-muted)",
+      }}
+    >
+      {text}
+    </button>
+  );
+}
+
+function RadioRow({
+  label: text,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-200"
+      style={{
+        border: active ? "1px solid var(--accent)" : "1px solid var(--border)",
+        background: active ? "rgba(233,30,140,0.04)" : "var(--bg-primary)",
+      }}
+    >
+      <span
+        className="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center"
+        style={{ border: active ? "4px solid var(--accent)" : "1.5px solid var(--border)" }}
+      />
+      <span
+        className="text-sm"
+        style={{ color: active ? "var(--text-primary)" : "var(--text-muted)" }}
+      >
+        {text}
+      </span>
+    </button>
   );
 }
 
@@ -64,9 +114,7 @@ export default function Contact() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!formRef.current) return;
-
     const fd = new FormData(formRef.current);
-
     const body = {
       name: fd.get("name") as string,
       phone: fd.get("phone") as string,
@@ -87,205 +135,267 @@ export default function Contact() {
       payment: payment ?? "",
       paymentOther: fd.get("paymentOther") as string,
     };
-
     setLoading(true);
     setError(null);
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-
       if (!res.ok) throw new Error("Server error");
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again or email us directly at popbestieco@gmail.com.");
+      setError("Something went wrong. Please try again or email us at popbestieco@gmail.com.");
     } finally {
       setLoading(false);
     }
   }
 
+  /* ── Success state ──────────────────────────────────────── */
   if (submitted) {
     return (
-      <section id="contact" className="py-24 bg-brand-soft">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <div className="w-20 h-20 rounded-full bg-brand-pink/10 flex items-center justify-center mx-auto mb-6">
-            <svg className="w-10 h-10 text-brand-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+      <section
+        id="contact"
+        style={{
+          background: "var(--bg-surface)",
+          borderTop: "1px solid var(--border)",
+          paddingTop: "6rem",
+          paddingBottom: "7rem",
+        }}
+      >
+        <div className="max-w-xl mx-auto px-6 text-center">
+          <div
+            className="w-14 h-14 flex items-center justify-center mx-auto mb-8"
+            style={{ border: "1.5px solid var(--accent)" }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
           <h2
-            className="text-4xl text-brand-deep mb-4"
-            style={{ fontFamily: "var(--font-dancing-script)" }}
+            className="font-serif text-text-primary mb-4"
+            style={{ fontSize: "clamp(2.5rem, 4vw, 3.5rem)", lineHeight: 0.95 }}
           >
-            We&apos;ve Got Your Inquiry!
+            We&apos;ve got your inquiry.
           </h2>
-          <p className="text-gray-500">
-            Thank you for reaching out to Pop Bestie Co.! We&apos;ll review your inquiry and
-            contact you within <strong>24–48 business hours</strong> to confirm availability and
-            next steps.
+          <p className="text-text-muted leading-relaxed" style={{ fontSize: "0.9375rem" }}>
+            Thank you for reaching out to Pop Bestie Co. We&apos;ll review your details and be in
+            touch within <strong className="text-text-primary">24–48 business hours</strong> to
+            confirm availability and next steps.
           </p>
         </div>
       </section>
     );
   }
 
+  /* ── Form ───────────────────────────────────────────────── */
   return (
-    <section id="contact" className="py-24 bg-brand-soft">
-      <div className="max-w-3xl mx-auto px-6">
-        <p className="text-center text-brand-pink text-xs font-semibold tracking-[0.3em] uppercase mb-3">
-          Let&apos;s Make It Happen
-        </p>
-        <h2
-          className="text-center text-5xl text-brand-deep mb-4"
-          style={{ fontFamily: "var(--font-dancing-script)" }}
-        >
-          Event Inquiry Form
-        </h2>
-        <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
-          We&apos;re excited to bring your vision to life. Please complete the form below with as
-          much detail as possible so we can curate the perfect setup for your event.
-        </p>
+    <section
+      id="contact"
+      style={{
+        background: "var(--bg-surface)",
+        borderTop: "1px solid var(--border)",
+        paddingTop: "6rem",
+        paddingBottom: "7rem",
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+        {/* Section header */}
+        <div className="mb-14">
+          <p
+            className="reveal text-[11px] font-medium tracking-[0.28em] uppercase mb-5"
+            style={{ color: "var(--accent)" }}
+          >
+            Let&apos;s Make It Happen
+          </p>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+            <h2
+              className="reveal font-serif text-text-primary leading-[0.9]"
+              style={{ fontSize: "clamp(3rem, 5vw, 4.75rem)" }}
+            >
+              Book your
+              <br />
+              <span className="italic text-text-muted">event setup.</span>
+            </h2>
+            <p
+              className="reveal text-text-muted leading-relaxed lg:max-w-sm lg:text-right"
+              style={{ fontSize: "0.9rem" }}
+            >
+              Complete the form below with as much detail as possible so we can
+              curate the perfect setup for your celebration.
+            </p>
+          </div>
+        </div>
 
+        {/* Form card */}
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="bg-white rounded-3xl shadow-sm border border-brand-blush p-8 md:p-10 space-y-10"
+          className="reveal max-w-3xl space-y-12"
+          style={{
+            background: "var(--bg-primary)",
+            border: "1px solid var(--border)",
+            padding: "clamp(2rem, 5vw, 3.5rem)",
+          }}
         >
-          {/* Client Information */}
+          {/* ── Client Information ────────────────────── */}
           <div>
-            <SectionHeader>Client Information</SectionHeader>
+            <Divider title="Client Information" />
             <div className="space-y-5">
               <div>
-                <label className={labelClass}>Full Name *</label>
-                <input required name="name" type="text" placeholder="Jane Smith" className={inputClass} />
+                <label className={label}>Full Name *</label>
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Jane Smith"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className={labelClass}>Phone Number *</label>
-                  <input required name="phone" type="tel" placeholder="(555) 000-0000" className={inputClass} />
+                  <label className={label}>Phone *</label>
+                  <input
+                    required
+                    name="phone"
+                    type="tel"
+                    placeholder="(555) 000-0000"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
                 <div>
-                  <label className={labelClass}>Email Address *</label>
-                  <input required name="email" type="email" placeholder="you@example.com" className={inputClass} />
+                  <label className={label}>Email *</label>
+                  <input
+                    required
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Event Details */}
+          {/* ── Event Details ─────────────────────────── */}
           <div>
-            <SectionHeader>Event Details</SectionHeader>
+            <Divider title="Event Details" />
             <div className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className={labelClass}>Event Date *</label>
-                  <input required name="eventDate" type="date" className={inputClass} />
+                  <label className={label}>Event Date *</label>
+                  <input
+                    required
+                    name="eventDate"
+                    type="date"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
                 <div>
-                  <label className={labelClass}>Event Time *</label>
-                  <input required name="eventTime" type="time" className={inputClass} />
+                  <label className={label}>Event Time *</label>
+                  <input
+                    required
+                    name="eventTime"
+                    type="time"
+                    className={`${input} ${inputFocusBorder}`}
+                    style={inputBorder}
+                  />
                 </div>
               </div>
               <div>
-                <label className={labelClass}>Event Location / Venue Address *</label>
-                <input required name="eventLocation" type="text" placeholder="123 Party Lane, City, State" className={inputClass} />
+                <label className={label}>Venue / Address *</label>
+                <input
+                  required
+                  name="eventLocation"
+                  type="text"
+                  placeholder="123 Party Lane, San Antonio, TX"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
-                <label className={labelClass}>Type of Event *</label>
+                <label className={label}>Type of Event *</label>
                 <div className="flex flex-wrap gap-2">
-                  {eventTypes.map((type) => (
-                    <button
-                      key={type}
-                      type="button"
-                      onClick={() => setSelectedEventType(type)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-                        selectedEventType === type
-                          ? "bg-brand-pink text-white border-brand-pink"
-                          : "bg-white text-gray-600 border-gray-200 hover:border-brand-pink hover:text-brand-pink"
-                      }`}
-                    >
-                      {type}
-                    </button>
+                  {eventTypes.map((t) => (
+                    <Chip
+                      key={t}
+                      label={t}
+                      active={selectedEventType === t}
+                      onClick={() => setSelectedEventType(t)}
+                    />
                   ))}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Package Selection */}
+          {/* ── Package Selection ─────────────────────── */}
           <div>
-            <SectionHeader>Package Selection</SectionHeader>
-            <label className={labelClass}>Which package are you interested in?</label>
-            <div className="space-y-2">
+            <Divider title="Package Selection" />
+            <label className={label}>
+              Which package are you interested in?
+            </label>
+            <div className="space-y-2 mt-3">
               {packages.map((pkg) => (
-                <label
+                <RadioRow
                   key={pkg}
-                  className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
-                    selectedPackage === pkg
-                      ? "border-brand-pink bg-brand-pink/5"
-                      : "border-gray-100 hover:border-brand-pink/40"
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="package"
-                    value={pkg}
-                    checked={selectedPackage === pkg}
-                    onChange={() => setSelectedPackage(pkg)}
-                    className="accent-brand-pink"
-                  />
-                  <span className="text-sm text-gray-700">{pkg}</span>
-                </label>
+                  label={pkg}
+                  active={selectedPackage === pkg}
+                  onClick={() => setSelectedPackage(pkg)}
+                />
               ))}
             </div>
           </div>
 
-          {/* Design Preferences */}
+          {/* ── Design Preferences ────────────────────── */}
           <div>
-            <SectionHeader>Design Preferences</SectionHeader>
+            <Divider title="Design Preferences" />
             <div className="space-y-5">
               <div>
-                <label className={labelClass}>Theme / Inspiration (optional)</label>
-                <input name="theme" type="text" placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…" className={inputClass} />
+                <label className={label}>Theme / Inspiration</label>
+                <input
+                  name="theme"
+                  type="text"
+                  placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
-                <label className={labelClass}>Upload Inspiration Photo (optional)</label>
-                <div className="w-full rounded-xl border-2 border-dashed border-gray-200 hover:border-brand-pink transition-colors p-6 text-center cursor-pointer">
-                  <input type="file" accept="image/*" className="hidden" id="inspo-upload" />
-                  <label htmlFor="inspo-upload" className="cursor-pointer">
-                    <svg className="w-8 h-8 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <p className="text-sm text-gray-400">Click to upload a photo</p>
-                  </label>
-                </div>
+                <label className={label}>Color Scheme</label>
+                <input
+                  name="colorScheme"
+                  type="text"
+                  placeholder="e.g. Hot pink, white & gold"
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
-                <label className={labelClass}>Color Scheme</label>
-                <input name="colorScheme" type="text" placeholder="e.g. Hot pink, white & gold" className={inputClass} />
+                <label className={label}>Custom Vinyl / Sign Text</label>
+                <input
+                  name="vinylText"
+                  type="text"
+                  placeholder='"Happy 30th, Sofia!" or "Baby Sofia"'
+                  className={`${input} ${inputFocusBorder}`}
+                  style={inputBorder}
+                />
               </div>
               <div>
-                <label className={labelClass}>Custom Text for Vinyl or Sign</label>
-                <input name="vinylText" type="text" placeholder='e.g. "Happy 30th, Sofia!" or "Baby Sofia"' className={inputClass} />
-              </div>
-              <div>
-                <label className={labelClass}>Character Prop Needed?</label>
-                <div className="flex gap-4">
+                <label className={label}>Character Prop Needed?</label>
+                <div className="flex gap-3">
                   {(["yes", "no"] as const).map((v) => (
-                    <label key={v} className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="character-prop"
-                        value={v}
-                        checked={characterProp === v}
-                        onChange={() => setCharacterProp(v)}
-                        className="accent-brand-pink"
-                      />
-                      <span className="text-sm text-gray-700 capitalize">{v}</span>
-                    </label>
+                    <Chip
+                      key={v}
+                      label={v === "yes" ? "Yes" : "No"}
+                      active={characterProp === v}
+                      onClick={() => setCharacterProp(v)}
+                    />
                   ))}
                 </div>
                 {characterProp === "yes" && (
@@ -293,112 +403,129 @@ export default function Contact() {
                     name="characterPropDetails"
                     type="text"
                     placeholder="Please specify the character"
-                    className={`${inputClass} mt-3`}
+                    className={`${input} ${inputFocusBorder} mt-3`}
+                    style={inputBorder}
                   />
                 )}
               </div>
             </div>
           </div>
 
-          {/* Additional Details */}
+          {/* ── Additional Details ────────────────────── */}
           <div>
-            <SectionHeader>Additional Details</SectionHeader>
+            <Divider title="Additional Details" />
             <div className="space-y-5">
               <div>
-                <label className={labelClass}>Special Requests or Important Notes</label>
+                <label className={label}>Special Requests or Notes</label>
                 <textarea
                   name="notes"
                   rows={4}
-                  placeholder="Anything else we should know about your event…"
-                  className={`${inputClass} resize-none`}
+                  placeholder="Anything else we should know…"
+                  className={`${input} ${inputFocusBorder} resize-none`}
+                  style={inputBorder}
                 />
               </div>
               <div>
-                <label className={labelClass}>How did you hear about us?</label>
+                <label className={label}>How did you hear about us?</label>
                 <div className="flex flex-wrap gap-2">
                   {referralSources.map((src) => (
-                    <button
+                    <Chip
                       key={src}
-                      type="button"
+                      label={src}
+                      active={referral === src}
                       onClick={() => setReferral(src)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
-                        referral === src
-                          ? "bg-brand-pink text-white border-brand-pink"
-                          : "bg-white text-gray-600 border-gray-200 hover:border-brand-pink hover:text-brand-pink"
-                      }`}
-                    >
-                      {src}
-                    </button>
+                    />
                   ))}
                 </div>
                 {referral === "Other" && (
-                  <input name="referralOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
+                  <input
+                    name="referralOther"
+                    type="text"
+                    placeholder="Please specify"
+                    className={`${input} ${inputFocusBorder} mt-3`}
+                    style={inputBorder}
+                  />
                 )}
               </div>
             </div>
           </div>
 
-          {/* Reservation & Payment */}
+          {/* ── Reservation & Payment ─────────────────── */}
           <div>
-            <SectionHeader>Reservation &amp; Payment</SectionHeader>
-            <div className="bg-brand-blush rounded-2xl p-5 mb-6 text-sm text-gray-600 leading-relaxed">
-              <p className="font-semibold text-brand-deep mb-1">Deposit Policy</p>
-              <p>
-                A <strong>50% non-refundable deposit</strong> is required to secure your selected
-                package and event date. The remaining balance is due prior to or on the day of
-                setup. Service will not begin until the full balance has been received.
+            <Divider title="Reservation & Payment" />
+            {/* Deposit policy */}
+            <div
+              className="px-5 py-4 mb-6"
+              style={{
+                background: "rgba(233,30,140,0.04)",
+                border: "1px solid rgba(233,30,140,0.12)",
+                borderLeft: "2px solid var(--accent)",
+              }}
+            >
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-accent mb-1.5">
+                Deposit Policy
+              </p>
+              <p
+                className="text-text-muted leading-relaxed"
+                style={{ fontSize: "0.875rem" }}
+              >
+                A{" "}
+                <strong className="text-text-primary">
+                  50% non-refundable deposit
+                </strong>{" "}
+                is required to secure your package and event date. The remaining
+                balance is due prior to or on the day of setup.
               </p>
             </div>
             <div>
-              <label className={labelClass}>Preferred Payment Method</label>
-              <div className="space-y-2">
+              <label className={label}>Preferred Payment Method</label>
+              <div className="space-y-2 mt-3">
                 {paymentMethods.map((method) => (
-                  <label
+                  <RadioRow
                     key={method}
-                    className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
-                      payment === method
-                        ? "border-brand-pink bg-brand-pink/5"
-                        : "border-gray-100 hover:border-brand-pink/40"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name="payment"
-                      value={method}
-                      checked={payment === method}
-                      onChange={() => setPayment(method)}
-                      className="accent-brand-pink"
-                    />
-                    <span className="text-sm text-gray-700">{method}</span>
-                  </label>
+                    label={method}
+                    active={payment === method}
+                    onClick={() => setPayment(method)}
+                  />
                 ))}
               </div>
               {payment === "Other" && (
-                <input name="paymentOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
+                <input
+                  name="paymentOther"
+                  type="text"
+                  placeholder="Please specify"
+                  className={`${input} ${inputFocusBorder} mt-3`}
+                  style={inputBorder}
+                />
               )}
             </div>
-            <p className="mt-4 text-xs text-gray-400 leading-relaxed">
-              Once your inquiry is reviewed and your date is confirmed, you will receive an invoice
-              with a secure payment link to complete your deposit.
-            </p>
           </div>
 
+          {/* Error */}
           {error && (
-            <div className="rounded-xl bg-red-50 border border-red-100 px-5 py-4 text-sm text-red-600">
+            <p className="text-sm" style={{ color: "#c0392b" }}>
               {error}
-            </div>
+            </p>
           )}
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-full bg-brand-pink text-white font-semibold text-sm tracking-widest uppercase hover:bg-brand-deep transition-colors shadow-lg shadow-brand-pink/30 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-4 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{
+              background: loading ? "var(--text-muted)" : "var(--accent)",
+            }}
           >
             {loading ? "Sending…" : "Submit My Inquiry"}
           </button>
 
-          <p className="text-center text-xs text-gray-400">
-            We&apos;ll be in touch within 24–48 business hours to confirm availability and next steps.
+          <p
+            className="text-center text-text-muted"
+            style={{ fontSize: "0.8rem" }}
+          >
+            We&apos;ll be in touch within 24–48 business hours to confirm
+            availability.
           </p>
         </form>
       </div>
