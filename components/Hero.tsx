@@ -69,10 +69,9 @@ export default function Hero() {
         <div className="lg:max-w-[52%]">
           {/* Eyebrow */}
           <p
-            className="animate-fade-up text-[11px] font-medium tracking-[0.28em] uppercase mb-10"
+            className="animate-fade-up text-[11px] font-medium tracking-[0.28em] uppercase mb-10 text-white/70"
             style={{
               animationDelay: "0ms",
-              color: "var(--text-muted)",
             }}
           >
             Est. 2024 &nbsp;·&nbsp; San Antonio, TX
@@ -80,17 +79,17 @@ export default function Hero() {
 
           {/* Headline — white on mobile (over dark image), dark on desktop */}
           <h1
-            className="font-serif leading-[0.9] mb-8"
+            className="font-serif leading-[0.9] mb-8 text-white"
             style={{ fontSize: "clamp(3.5rem, 5.5vw, 5.75rem)" }}
           >
             <span
-              className="block animate-fade-up lg:text-text-primary text-white"
+              className="block animate-fade-up text-white"
               style={{ animationDelay: "80ms" }}
             >
               Transforming
             </span>
             <span
-              className="block animate-fade-up lg:text-text-primary text-white"
+              className="block animate-fade-up text-white"
               style={{ animationDelay: "160ms" }}
             >
               Parties Into
@@ -102,7 +101,7 @@ export default function Hero() {
               Unforgettable
             </span>
             <span
-              className="block animate-fade-up lg:text-text-primary text-white"
+              className="block animate-fade-up text-white"
               style={{ animationDelay: "320ms" }}
             >
               Moments.
@@ -111,7 +110,7 @@ export default function Hero() {
 
           {/* Descriptor */}
           <p
-            className="animate-fade-up leading-relaxed mb-12 lg:text-text-muted text-white/80"
+            className="animate-fade-up leading-relaxed mb-12 text-white/70"
             style={{
               animationDelay: "400ms",
               fontSize: "0.95rem",
