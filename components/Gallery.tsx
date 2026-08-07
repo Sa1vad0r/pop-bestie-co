@@ -18,19 +18,84 @@ import Image from "next/image";
   Row sums: r1=6 ✓  r2=6 ✓  r3=6 ✓  r4=6 ✓
 */
 const photos = [
-  { src: "/images/gallery-sesame-street.jpg",    alt: "Sesame Street Birthday",          col: 2, row: 2 },
-  { src: "/images/gallery-blue-sage-gold.jpg",   alt: "Blue, Sage & Gold Backdrop",      col: 2, row: 1 },
-  { src: "/images/gallery-wildflower.jpg",       alt: "A Little Wildflower Baby Shower", col: 1, row: 1 },
-  { src: "/images/gallery-hunny.jpg",            alt: "A Little Hunny Baby Shower",      col: 1, row: 1 },
-  { src: "/images/gallery-baby-guerrero.jpg",    alt: "Baby Guerrero Setup",             col: 1, row: 1 },
-  { src: "/images/gallery-mrs-esquivel.jpg",     alt: "Future Mrs. Esquivel",            col: 2, row: 2 },
-  { src: "/images/gallery-baby-losoya.jpg",      alt: "Baby Losoya Safari",              col: 1, row: 1 },
-  { src: "/images/gallery-twenty-fine.jpg",      alt: "Twenty Fine Birthday",            col: 2, row: 1 },
-  { src: "/images/gallery-sonic.jpg",            alt: "Kobe Turns 6 — Sonic Theme",     col: 1, row: 1 },
-  { src: "/images/gallery-xoxo.jpg",             alt: "XOXO Valentine Setup",            col: 1, row: 1 },
-  { src: "/images/gallery-adventure-awaits.jpg", alt: "Adventure Awaits Baby Shower",   col: 2, row: 1 },
-  { src: "/images/gallery-baby-legg-1.jpg",      alt: "Baby Legg Is Brewing",           col: 1, row: 1 },
-  { src: "/images/gallery-baby-legg-2.jpg",      alt: "Baby Legg Luxe Setup",           col: 3, row: 1 },
+  {
+    src: "/images/gallery-sesame-street.jpg",
+    alt: "Sesame Street Birthday",
+    col: 2,
+    row: 2,
+  },
+  {
+    src: "/images/gallery-blue-sage-gold.jpg",
+    alt: "Blue, Sage & Gold Backdrop",
+    col: 2,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-wildflower.jpg",
+    alt: "A Little Wildflower Baby Shower",
+    col: 1,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-hunny.jpg",
+    alt: "A Little Hunny Baby Shower",
+    col: 1,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-baby-guerrero.jpg",
+    alt: "Baby Guerrero Setup",
+    col: 1,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-mrs-esquivel.jpg",
+    alt: "Future Mrs. Esquivel",
+    col: 2,
+    row: 2,
+  },
+  {
+    src: "/images/gallery-baby-losoya.jpg",
+    alt: "Baby Losoya Safari",
+    col: 1,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-twenty-fine.jpg",
+    alt: "Twenty Fine Birthday",
+    col: 2,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-sonic.jpg",
+    alt: "Kobe Turns 6 — Sonic Theme",
+    col: 1,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-xoxo.jpg",
+    alt: "XOXO Valentine Setup",
+    col: 1,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-adventure-awaits.jpg",
+    alt: "Adventure Awaits Baby Shower",
+    col: 2,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-baby-legg-1.jpg",
+    alt: "Baby Legg Is Brewing",
+    col: 1,
+    row: 1,
+  },
+  {
+    src: "/images/gallery-baby-legg-2.jpg",
+    alt: "Baby Legg Luxe Setup",
+    col: 3,
+    row: 1,
+  },
 ];
 
 export default function Gallery() {
@@ -45,7 +110,6 @@ export default function Gallery() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-
         {/* ── Header ──────────────────────────────────────── */}
         <div
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-10"
@@ -69,15 +133,15 @@ export default function Gallery() {
           </div>
 
           <div className="reveal flex flex-col items-start md:items-end gap-2">
-            <p
+            {/* <p
               className="font-serif text-text-muted"
               style={{ fontSize: "clamp(3.5rem, 6vw, 5.5rem)", lineHeight: 1 }}
             >
-              {photos.length}
+              300+
             </p>
             <p className="text-[10px] tracking-[0.25em] uppercase text-text-muted">
               Setups &amp; counting
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -115,9 +179,7 @@ export default function Gallery() {
                     "linear-gradient(to top, rgba(12,11,10,0.78) 0%, rgba(12,11,10,0.1) 55%, transparent 100%)",
                 }}
               >
-                <span
-                  className="block px-5 pb-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-400 text-[11px] font-medium tracking-[0.15em] uppercase text-white/90"
-                >
+                <span className="block px-5 pb-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-400 text-[11px] font-medium tracking-[0.15em] uppercase text-white/90">
                   {photo.alt}
                 </span>
               </div>
@@ -155,12 +217,22 @@ export default function Gallery() {
             style={{ borderColor: "var(--border)" }}
           >
             Book your setup
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
             </svg>
           </a>
         </div>
-
       </div>
     </section>
   );
