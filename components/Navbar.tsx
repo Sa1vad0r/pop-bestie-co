@@ -53,7 +53,7 @@ export default function Navbar() {
           ))}
           <a
             href="#contact"
-            className="ml-2 px-5 py-2 rounded-full text-xs font-semibold tracking-widest uppercase bg-brand-pink text-white hover:bg-brand-deep transition-colors"
+            className="ml-2 px-5 py-2 rounded-full text-xs font-semibold border-[1px] border-white tracking-widest uppercase bg-brand-pink text-white hover:bg-brand-deep transition-colors"
           >
             Book Now
           </a>

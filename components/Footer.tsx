@@ -11,7 +11,7 @@ export default function Footer() {
             Pop Bestie Co.
           </p>
           <p className="text-white/60 text-xs tracking-widest uppercase">
-            Transforming Parties into a Magical Experience
+            Balloon Garlands &amp; Bespoke Event Setups
           </p>
         </div>
 

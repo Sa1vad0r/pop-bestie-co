@@ -1,3 +1,28 @@
+const tickerItems = [
+  "Balloon Garlands",
+  "Custom Backdrops",
+  "Vinyl Lettering",
+  "Character Props",
+  "Bespoke Setups",
+  "San Antonio, TX",
+];
+
+function TickerGroup() {
+  return (
+    <span className="inline-flex">
+      {tickerItems.map((item) => (
+        <span
+          key={item}
+          className="inline-flex items-center gap-5 px-5 text-[10px] font-semibold tracking-[0.25em] uppercase text-brand-deep/70"
+        >
+          {item}
+          <span className="shrink-0 w-[3px] h-[3px] rounded-full bg-brand-pink/70" />
+        </span>
+      ))}
+    </span>
+  );
+}
+
 export default function Hero() {
   return (
     <section
@@ -32,39 +57,55 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+      <div className="relative z-10 text-center px-6 pb-20 max-w-3xl mx-auto">
         <p className="text-white/80 text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-          Transforming Parties Into A
+          Transforming Parties Into
         </p>
         <h1
           className="text-6xl md:text-8xl text-white mb-8 leading-tight"
           style={{ fontFamily: "var(--font-dancing-script)" }}
         >
-          Magical Experience!
+          Unforgettable Moments.
         </h1>
-        <p className="text-white/90 text-lg md:text-xl mb-10 max-w-md mx-auto">
-          Custom balloon garlands, stunning backdrops, and unforgettable event setups — crafted with love.
+        <p className="text-white/90 text-lg md:text-xl mb-10 max-w-xl mx-auto">
+          From intimate weekend gatherings to large-scale corporate events, our custom balloon
+          garlands, stunning backdrops, and bespoke setups make hosting effortless — crafted
+          with intention for celebrations that deserve to be remembered.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
           <a
             href="#contact"
             className="px-8 py-3 rounded-full bg-white text-brand-pink font-semibold text-sm tracking-widest uppercase hover:bg-brand-blush transition-colors"
           >
-            Book Now
+            Book Your Event
           </a>
           <a
-            href="#contact"
+            href="#services"
             className="px-8 py-3 rounded-full border-2 border-white text-white font-semibold text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"
           >
-            Contact Us
+            View Packages
+          </a>
+          <a
+            href="#corporate"
+            className="px-8 py-3 rounded-full border-2 border-white text-white font-semibold text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"
+          >
+            Corporate &amp; Private Events
           </a>
         </div>
       </div>
 
-      {/* Scroll hint */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/60">
-        <span className="text-xs tracking-widest uppercase">Scroll</span>
-        <div className="w-px h-8 bg-white/40" />
+      {/* Looping ticker */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden border-t border-white/30"
+        style={{
+          background: "rgba(255, 255, 255, 0.9)",
+          backdropFilter: "blur(8px)",
+        }}
+      >
+        <div className="animate-marquee flex whitespace-nowrap py-3.5">
+          <TickerGroup />
+          <TickerGroup />
+        </div>
       </div>
     </section>
   );

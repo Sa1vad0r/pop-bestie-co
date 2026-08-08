@@ -3,12 +3,13 @@
 import { useState } from "react";
 
 const packages = [
-  "The Basic Set Up",
   "The Essential Set Up",
   "The Signature Set Up",
+  "The Corporate Balloon Arch",
   "The Luxe Experience",
   "The Luxe Experience 2.0",
   "The Luxe Experience 3.0",
+  "Balloon Towers",
   "Not Sure / Need Help Choosing",
 ];
 
@@ -300,6 +301,10 @@ export default function Contact() {
                 A <strong>50% non-refundable deposit</strong> is required to secure your selected
                 package and event date. The remaining balance is due prior to or on the day of
                 setup. Service will not begin until the full balance has been received.
+              </p>
+              <p className="mt-2">
+                Corporate clients receive itemized invoicing and PO-based billing options — see
+                our <a href="#corporate" className="text-brand-pink font-semibold underline">Corporate &amp; Private Events</a> section for details.
               </p>
             </div>
             <div>

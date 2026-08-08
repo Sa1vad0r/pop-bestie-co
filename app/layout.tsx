@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Dancing_Script } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -16,9 +15,9 @@ const dancingScript = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Pop Bestie Co. | Transforming Parties into a Magical Experience",
+  title: "Pop Bestie Co. | Bespoke Event Setups in San Antonio",
   description:
-    "Pop Bestie Co. — balloon garlands, custom backdrops, and unforgettable event setups by Nancy & Jalynn.",
+    "Balloon garlands, custom backdrops, and bespoke event setups for intimate celebrations and large-scale corporate events across San Antonio, TX.",
 };
 
 export default function RootLayout({
@@ -31,10 +30,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${dancingScript.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        {children}
-        <Analytics />
-      </body>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

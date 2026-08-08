@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
 const reviews = [
   {
     name: "Ana Paula",
@@ -40,6 +44,14 @@ const reviews = [
     stars: 5,
   },
   {
+    name: "Tori Danielle",
+    date: "2025",
+    platform: "Google",
+    text: "10/10 ✨ Pop Bestie Co. is amazing and will be our go-to for any future events!",
+    strengths: [],
+    stars: 5,
+  },
+  {
     name: "Stephanie",
     date: "Dec 24, 2025",
     platform: "Etsy",
@@ -48,6 +60,13 @@ const reviews = [
     stars: 5,
   },
 ];
+
+const CARD_WIDTH = 320;
+const GAP = 24;
+const STEP = CARD_WIDTH + GAP;
+const SPEED = 0.035; // px / ms
+const SET_WIDTH = reviews.length * STEP;
+const slides = [...reviews, ...reviews, ...reviews];
 
 function Stars({ count }: { count: number }) {
   return (
@@ -62,8 +81,70 @@ function Stars({ count }: { count: number }) {
 }
 
 export default function Reviews() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(SET_WIDTH);
+  const draggingRef = useRef(false);
+  const pausedRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartOffsetRef = useRef(0);
+  const movedRef = useRef(false);
+
+  function wrapOffset() {
+    if (offsetRef.current >= SET_WIDTH * 2) offsetRef.current -= SET_WIDTH;
+    if (offsetRef.current < 0) offsetRef.current += SET_WIDTH;
+  }
+
+  function applyTransform() {
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translate3d(${-offsetRef.current}px,0,0)`;
+    }
+  }
+
+  useEffect(() => {
+    applyTransform();
+    let frameId: number;
+    let last = performance.now();
+    function tick(now: number) {
+      const dt = now - last;
+      last = now;
+      if (!draggingRef.current && !pausedRef.current) {
+        offsetRef.current += dt * SPEED;
+        wrapOffset();
+        applyTransform();
+      }
+      frameId = requestAnimationFrame(tick);
+    }
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+
+  function onPointerDown(e: React.PointerEvent) {
+    draggingRef.current = true;
+    movedRef.current = false;
+    dragStartXRef.current = e.clientX;
+    dragStartOffsetRef.current = offsetRef.current;
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!draggingRef.current) return;
+    const dx = e.clientX - dragStartXRef.current;
+    if (Math.abs(dx) > 3) movedRef.current = true;
+    offsetRef.current = dragStartOffsetRef.current - dx;
+    wrapOffset();
+    applyTransform();
+  }
+
+  function endDrag() {
+    draggingRef.current = false;
+  }
+
   return (
-    <section className="py-24 bg-white">
+    <section
+      className="py-24 bg-white overflow-hidden"
+      onMouseEnter={() => (pausedRef.current = true)}
+      onMouseLeave={() => (pausedRef.current = false)}
+    >
       <div className="max-w-6xl mx-auto px-6">
         <p className="text-center text-brand-pink text-xs font-semibold tracking-[0.3em] uppercase mb-3">
           Client Love
@@ -75,14 +156,28 @@ export default function Reviews() {
           Kind Words from Our Clients
         </h2>
         <p className="text-center text-gray-500 mb-14 max-w-xl mx-auto">
-          Real reviews from real celebrations — we love making memories with you.
+          Real reviews from real celebrations — drag to explore.
         </p>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((r) => (
+      <div
+        className="relative w-full cursor-grab active:cursor-grabbing select-none"
+        style={{ touchAction: "pan-y" }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onPointerLeave={endDrag}
+      >
+        <div ref={trackRef} className="flex" style={{ gap: `${GAP}px`, willChange: "transform" }}>
+          {slides.map((r, i) => (
             <div
-              key={r.name + r.date}
-              className="bg-brand-soft rounded-2xl p-7 flex flex-col gap-4 border border-brand-blush"
+              key={`${r.name}-${r.date}-${i}`}
+              className="shrink-0 bg-brand-soft rounded-2xl p-7 flex flex-col gap-4 border border-brand-blush"
+              style={{ width: `${CARD_WIDTH}px` }}
+              onClick={(e) => {
+                if (movedRef.current) e.preventDefault();
+              }}
             >
               <span
                 className="text-5xl text-brand-pink/20 leading-none select-none"
@@ -93,9 +188,7 @@ export default function Reviews() {
               <Stars count={r.stars} />
               <p className="text-gray-600 text-sm leading-relaxed flex-1">{r.text}</p>
               {r.strengths.length > 0 && (
-                <p className="text-xs text-gray-400">
-                  Strengths: {r.strengths.join(" · ")}
-                </p>
+                <p className="text-xs text-gray-400">Strengths: {r.strengths.join(" · ")}</p>
               )}
               <div className="pt-3 border-t border-brand-blush flex items-center justify-between">
                 <div>
@@ -110,16 +203,9 @@ export default function Reviews() {
           ))}
         </div>
 
-        {/* Tori Danielle highlight */}
-        <div className="mt-10 text-center">
-          <div className="inline-block bg-brand-soft border border-brand-blush rounded-2xl px-8 py-5">
-            <Stars count={5} />
-            <p className="text-gray-700 text-base mt-2 font-medium">
-              &ldquo;10/10 ✨ Pop Bestie Co. is amazing and will be our go-to for any future events!&rdquo;
-            </p>
-            <p className="text-sm text-brand-pink mt-2">— Tori Danielle</p>
-          </div>
-        </div>
+        {/* Edge fades */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-linear-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-linear-to-l from-white to-transparent" />
       </div>
     </section>
   );
