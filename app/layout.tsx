@@ -1,23 +1,26 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import { Dancing_Script } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const dancingScript = Dancing_Script({
-  variable: "--font-dancing-script",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Pop Bestie Co. | Bespoke Event Setups in San Antonio",
   description:
-    "Balloon garlands, custom backdrops, and bespoke event setups for intimate celebrations and large-scale corporate events across San Antonio, TX.",
+    "Pop Bestie Co. — balloon garlands, custom backdrops, and unforgettable event setups for intimate celebrations and corporate events, by Nancy & Jalynn. Based in San Antonio, TX.",
 };
 
 export default function RootLayout({
@@ -28,9 +31,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${dancingScript.variable} h-full antialiased`}
+      className={`${cormorant.variable} ${dmSans.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">{children}</body>
     </html>
   );
 }
