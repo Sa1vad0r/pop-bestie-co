@@ -3,12 +3,13 @@
 import { useRef, useState } from "react";
 
 const packages = [
-  "The Basic Set Up",
   "The Essential Set Up",
   "The Signature Set Up",
   "The Luxe Experience",
   "The Luxe Experience 2.0",
   "The Luxe Experience 3.0",
+  "Corporate Balloon Arch",
+  "Balloon Towers",
   "Not Sure / Need Help Choosing",
 ];
 

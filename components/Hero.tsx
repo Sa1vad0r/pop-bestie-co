@@ -26,12 +26,12 @@ export default function Hero() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        {/* Dark gradient at bottom so light text remains readable */}
+        {/* Pink gradient at bottom so light text remains readable */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to top, rgba(10,8,6,0.82) 40%, rgba(10,8,6,0.45) 75%, rgba(10,8,6,0.15) 100%)",
+              "linear-gradient(to top, rgba(122,14,69,0.88) 35%, rgba(176,19,104,0.55) 70%, rgba(233,30,140,0.2) 100%)",
           }}
         />
       </div>
@@ -46,13 +46,13 @@ export default function Hero() {
           className="object-cover object-center"
           sizes="100vw"
         />
-        {/* Semi-transparent dark overlay on left side for text readability */}
+        {/* Semi-transparent pink overlay on left side for text readability */}
         <div
           className="absolute inset-y-0 left-0 z-10"
           style={{
-            width: "52%",
+            width: "56%",
             background:
-              "linear-gradient(to right, rgba(10,8,6,0.6) 0%, rgba(10,8,6,0.3) 70%, transparent 100%)",
+              "linear-gradient(to right, rgba(122,14,69,0.7) 0%, rgba(176,19,104,0.4) 65%, transparent 100%)",
           }}
         />
       </div>
@@ -95,8 +95,8 @@ export default function Hero() {
               Parties Into
             </span>
             <span
-              className="block animate-fade-up italic text-accent"
-              style={{ animationDelay: "240ms" }}
+              className="block animate-fade-up italic"
+              style={{ animationDelay: "240ms", color: "#FFD1EA" }}
             >
               Unforgettable
             </span>

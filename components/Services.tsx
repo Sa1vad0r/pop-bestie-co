@@ -16,21 +16,6 @@ const packages = [
     featured: true,
   },
   {
-    id: "Essential",
-    name: "Essential",
-    label: null,
-    tagline: "Perfect for intimate celebrations.",
-    description:
-      "A 6.6 ft wooden backdrop paired with a balloon Party Columns and a Half Circle Traditional Arch.",
-    includes: [
-      "6.6 ft wooden backdrop",
-      "7 ft balloon garland (up to 2 colors)",
-      "Custom vinyl lettering",
-    ],
-    price: "$300",
-    featured: false,
-  },
-  {
     id: "essential",
     name: "Essential",
     label: null,
@@ -43,6 +28,24 @@ const packages = [
       "Custom vinyl lettering",
     ],
     price: "$350",
+    featured: false,
+  },
+  {
+    id: "corporate-arch",
+    name: "Corporate Balloon Arch",
+    label: "Corporate",
+    tagline: "Traditional organic, built for brand events.",
+    description:
+      "A semi-circle balloon arch in your brand colors, finished with custom balloon foil or logo work — sized and staged for corporate activations.",
+    includes: [
+      "Semi-circle traditional organic arch",
+      "Up to 3 balloon colors",
+      "Custom balloon foil or logo",
+      "$2M general liability COI issued on request",
+      "W-9 on file, Net 30 terms",
+      "On-time or the install is free",
+    ],
+    price: "$525",
     featured: false,
   },
   {
@@ -97,6 +100,18 @@ const packages = [
   },
 ];
 
+const corporateTower = {
+  id: "corporate-towers",
+  name: "Balloon Towers",
+  price: "$150",
+  includes: [
+    "6 ft tall",
+    "Customized with logo",
+    "Up to 3 balloon colors",
+    "Streamer colors of your choice",
+  ],
+};
+
 /* ── Icon: thin check mark ──────────────────────────────── */
 function CheckIcon() {
   return (
@@ -138,34 +153,22 @@ function ArrowIcon() {
   );
 }
 
-/* ── Signature (featured) card ──────────────────────────── */
+/* ── Signature (featured) card — solid pink fill ────────── */
 function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
   return (
     <div
-      className="reveal relative flex flex-col col-span-1 md:col-span-2 md:row-span-2 p-8 lg:p-10 overflow-hidden"
+      className="reveal relative flex flex-col col-span-1 md:col-span-2 md:row-span-2 p-8 lg:p-10 overflow-hidden rounded-2xl"
       style={{
-        background: "var(--bg-primary)",
-        border: "1px solid var(--border)",
-        borderLeft: "2px solid var(--accent)",
+        background: "linear-gradient(160deg, var(--accent) 0%, #B01368 100%)",
       }}
     >
-      {/* Accent glow */}
-      <div
-        className="absolute top-0 left-0 w-64 h-64 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(circle at top left, rgba(233,30,140,0.08), transparent 70%)",
-        }}
-      />
-
-      {/* Label */}
+      {/* Label / ribbon */}
       <div className="flex items-center gap-3 mb-6 relative z-10">
         <span
-          className="text-[10px] font-semibold tracking-[0.25em] uppercase px-3 py-1"
+          className="text-[10px] font-semibold tracking-[0.25em] uppercase px-3 py-1.5 rounded-full"
           style={{
-            color: "var(--accent)",
-            background: "rgba(233,30,140,0.1)",
-            border: "1px solid rgba(233,30,140,0.2)",
+            color: "#fff",
+            background: "#241118",
           }}
         >
           {pkg.label}
@@ -175,14 +178,14 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
       {/* Name + tagline */}
       <div className="relative z-10 mb-6">
         <h3
-          className="font-serif text-text-primary leading-none mb-2"
+          className="font-serif italic text-white leading-none mb-2"
           style={{ fontSize: "clamp(2.5rem, 4vw, 3.75rem)" }}
         >
           {pkg.name} Setup
         </h3>
         <p
-          className="font-serif italic text-text-muted"
-          style={{ fontSize: "1.1rem" }}
+          className="font-serif italic"
+          style={{ fontSize: "1.1rem", color: "rgba(255,255,255,0.88)" }}
         >
           {pkg.tagline}
         </p>
@@ -190,8 +193,12 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
 
       {/* Description */}
       <p
-        className="relative z-10 text-text-muted leading-relaxed mb-8"
-        style={{ fontSize: "0.875rem", maxWidth: "38rem" }}
+        className="relative z-10 leading-relaxed mb-8"
+        style={{
+          fontSize: "0.875rem",
+          maxWidth: "38rem",
+          color: "rgba(255,255,255,0.85)",
+        }}
       >
         {pkg.description}
       </p>
@@ -199,7 +206,7 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
       {/* Divider */}
       <div
         className="relative z-10 w-10 h-px mb-6"
-        style={{ background: "var(--border)" }}
+        style={{ background: "rgba(255,255,255,0.3)" }}
       />
 
       {/* Includes */}
@@ -207,10 +214,10 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
         {pkg.includes.map((item) => (
           <li
             key={item}
-            className="flex items-start gap-3 text-text-muted"
-            style={{ fontSize: "0.8125rem" }}
+            className="flex items-start gap-3"
+            style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.92)" }}
           >
-            <span className="text-accent mt-[1px]">
+            <span className="text-white mt-[1px]">
               <CheckIcon />
             </span>
             {item}
@@ -221,14 +228,17 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
       {/* Price + CTA */}
       <div
         className="relative z-10 flex items-end justify-between mt-10 pt-6"
-        style={{ borderTop: "1px solid var(--border)" }}
+        style={{ borderTop: "1px solid rgba(255,255,255,0.25)" }}
       >
         <div>
-          <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-1">
+          <p
+            className="text-[10px] tracking-[0.2em] uppercase mb-1"
+            style={{ color: "rgba(255,255,255,0.75)" }}
+          >
             Starting at
           </p>
           <p
-            className="font-serif text-text-primary"
+            className="font-serif text-white"
             style={{ fontSize: "3rem", lineHeight: 1 }}
           >
             {pkg.price}
@@ -236,7 +246,8 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
         </div>
         <a
           href="#contact"
-          className="group inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase text-accent hover:gap-4 transition-all duration-300"
+          className="group inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase px-5 py-3 rounded-full hover:gap-4 transition-all duration-300"
+          style={{ background: "#fff", color: "#B01368" }}
         >
           Book This Setup
           <ArrowIcon />
@@ -246,25 +257,25 @@ function FeaturedCard({ pkg }: { pkg: (typeof packages)[0] }) {
   );
 }
 
-/* ── Standard card ──────────────────────────────────────── */
+/* ── Standard card — blush pink fill ────────────────────── */
 function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
   return (
     <div
-      className="reveal service-card relative flex flex-col p-7 group"
+      className="reveal service-card relative flex flex-col p-7 group rounded-2xl"
       style={{
-        background: "var(--bg-primary)",
-        border: "1px solid var(--border)",
+        background: "rgba(233,30,140,0.06)",
+        border: "1px solid rgba(233,30,140,0.12)",
         animationDelay: `${delay}ms`,
       }}
     >
       {/* Label if any */}
       {pkg.label && (
         <span
-          className="self-start mb-4 text-[10px] font-semibold tracking-[0.25em] uppercase px-2.5 py-1"
+          className="self-start mb-4 text-[10px] font-semibold tracking-[0.25em] uppercase px-2.5 py-1 rounded-full"
           style={{
             color: "var(--accent)",
-            background: "rgba(233,30,140,0.08)",
-            border: "1px solid rgba(233,30,140,0.15)",
+            background: "rgba(233,30,140,0.1)",
+            border: "1px solid rgba(233,30,140,0.2)",
           }}
         >
           {pkg.label}
@@ -273,7 +284,7 @@ function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
 
       {/* Name */}
       <h3
-        className="font-serif text-text-primary leading-none mb-1"
+        className="font-serif italic text-[#B01368] leading-none mb-1"
         style={{ fontSize: "1.875rem" }}
       >
         {pkg.name}
@@ -293,7 +304,7 @@ function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
             className="flex items-start gap-2.5 text-text-muted"
             style={{ fontSize: "0.8rem" }}
           >
-            <span className="text-text-muted/50 mt-[1px]">
+            <span className="text-accent mt-[1px]">
               <CheckIcon />
             </span>
             {item}
@@ -304,7 +315,7 @@ function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
       {/* Price + CTA */}
       <div
         className="flex items-end justify-between mt-6 pt-5"
-        style={{ borderTop: "1px solid var(--border)" }}
+        style={{ borderTop: "1px solid rgba(233,30,140,0.15)" }}
       >
         <div>
           <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-0.5">
@@ -319,7 +330,8 @@ function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
         </div>
         <a
           href="#contact"
-          className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.18em] uppercase text-text-muted hover:text-accent transition-colors duration-300 group-hover:text-accent"
+          className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.18em] uppercase px-4 py-2.5 rounded-full transition-colors duration-300"
+          style={{ background: "var(--accent)", color: "#fff" }}
         >
           Book
           <ArrowIcon />
@@ -331,7 +343,7 @@ function Card({ pkg, delay }: { pkg: (typeof packages)[0]; delay: number }) {
 
 /* ── Section ────────────────────────────────────────────── */
 export default function Services() {
-  const [signature, basic, essential, luxe, luxe2, luxe3] = packages;
+  const [signature, essential, corporateArch, luxe, luxe2, luxe3] = packages;
 
   return (
     <section
@@ -389,19 +401,19 @@ export default function Services() {
         {/* ── Bento grid ───────────────────────────────── */}
         {/*
           3-col layout:
-          Row 1-2: [Signature col-span-2 row-span-2] [Basic]
-                                                      [Essential]
+          Row 1-2: [Signature col-span-2 row-span-2] [Essential]
+                                                      [Corporate Arch]
           Row 3:   [Luxe]  [Luxe 2.0]  [Luxe 3.0]
         */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 auto-rows-auto">
           {/* Signature — featured, 2×2 */}
           <FeaturedCard pkg={signature} />
 
-          {/* Basic */}
-          <Card pkg={basic} delay={80} />
-
           {/* Essential */}
-          <Card pkg={essential} delay={160} />
+          <Card pkg={essential} delay={80} />
+
+          {/* Corporate Balloon Arch */}
+          <Card pkg={corporateArch} delay={160} />
 
           {/* Luxe row */}
           <Card pkg={luxe} delay={0} />
@@ -412,11 +424,11 @@ export default function Services() {
         {/* ── Corporate & Private Events ─────────────────── */}
         <div
           id="corporate"
-          className="reveal grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 mt-6 p-8 lg:p-10"
+          className="reveal grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 mt-6 p-8 lg:p-10 rounded-2xl"
           style={{
             background: "var(--bg-primary)",
-            border: "1px solid var(--border)",
-            borderLeft: "2px solid var(--accent)",
+            border: "1px solid rgba(233,30,140,0.15)",
+            borderLeft: "3px solid var(--accent)",
           }}
         >
           <div>
@@ -470,6 +482,59 @@ export default function Services() {
               className="group inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase text-accent hover:gap-4 transition-all duration-300 self-start"
             >
               Request a Corporate Quote
+              <ArrowIcon />
+            </a>
+          </div>
+        </div>
+
+        {/* ── Balloon Towers add-on ────────────────────── */}
+        <div
+          className="reveal flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mt-4 p-7 lg:p-8 rounded-2xl"
+          style={{
+            background: "rgba(233,30,140,0.06)",
+            border: "1px solid rgba(233,30,140,0.12)",
+          }}
+        >
+          <div>
+            <h4
+              className="font-serif italic text-[#B01368] mb-2"
+              style={{ fontSize: "1.5rem" }}
+            >
+              {corporateTower.name}
+            </h4>
+            <ul className="flex flex-wrap gap-x-6 gap-y-1.5">
+              {corporateTower.includes.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-2 text-text-muted"
+                  style={{ fontSize: "0.8rem" }}
+                >
+                  <span className="text-accent">
+                    <CheckIcon />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex items-center gap-6">
+            <div>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-0.5">
+                From
+              </p>
+              <p
+                className="font-serif text-text-primary"
+                style={{ fontSize: "2rem", lineHeight: 1 }}
+              >
+                {corporateTower.price}
+              </p>
+            </div>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.18em] uppercase px-4 py-2.5 rounded-full transition-colors duration-300 whitespace-nowrap"
+              style={{ background: "var(--accent)", color: "#fff" }}
+            >
+              Book
               <ArrowIcon />
             </a>
           </div>
