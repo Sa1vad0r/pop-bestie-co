@@ -41,6 +41,14 @@ const reviews = [
     platform: "Etsy",
     text: "So cute! She made it quickly, I gave her creative freedom and it turned out beyond what I expected. Highly recommend — book them now!",
   },
+  // TODO: Replace with a real quote from a corporate client (e.g. an office
+  // manager, HR lead, or planner who booked a company event) before launch.
+  {
+    name: "[Corporate Client Name]",
+    date: "[Add date]",
+    platform: "Corporate Event",
+    text: "[Add a quote from a corporate client describing their experience booking a company party, launch, or team event with Pop Bestie Co.]",
+  },
 ];
 
 function StarRow() {

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 const FROM = "Pop Bestie Co. <noreply@popbestieco.com>";
-const BUSINESS_EMAIL = "popbestieco@gmail.com";
+const BUSINESS_EMAIL = process.env.BUSINESS_EMAIL || "salvadoralfaro44@gmail.com";
 
 export async function POST(req: NextRequest) {
   const data = await req.json();
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
   } = data;
 
   try {
-    await Promise.all([
+    const [businessResult, customerResult] = await Promise.all([
       resend.emails.send({
         from: FROM,
         to: BUSINESS_EMAIL,
@@ -45,6 +45,14 @@ export async function POST(req: NextRequest) {
         html: buildCustomerEmail(name),
       }),
     ]);
+
+    if (businessResult.error) {
+      console.error("Business email failed:", businessResult.error);
+      return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    }
+    if (customerResult.error) {
+      console.error("Customer confirmation email failed:", customerResult.error);
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

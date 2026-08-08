@@ -117,9 +117,10 @@ export default function Hero() {
               maxWidth: "28rem",
             }}
           >
-            Custom balloon garlands, stunning backdrops, and bespoke event
-            setups — crafted with intention for celebrations that deserve to be
-            remembered.
+            From intimate weekend gatherings to large-scale corporate events,
+            our custom balloon garlands, stunning backdrops, and bespoke
+            setups make hosting effortless — crafted with intention for
+            celebrations that deserve to be remembered.
           </p>
 
           {/* CTAs */}
@@ -151,6 +152,12 @@ export default function Hero() {
               className="text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 border-b pb-px lg:text-text-muted lg:border-text-muted/25 lg:hover:text-text-primary text-white/70 border-white/30 hover:text-white"
             >
               View Packages
+            </a>
+            <a
+              href="#corporate"
+              className="text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 border-b pb-px lg:text-text-muted lg:border-text-muted/25 lg:hover:text-text-primary text-white/70 border-white/30 hover:text-white"
+            >
+              Corporate &amp; Private Events
             </a>
           </div>
         </div>

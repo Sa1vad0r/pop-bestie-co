@@ -55,8 +55,8 @@ export default function Footer() {
             }}
           >
             Balloon garlands, custom backdrops, and bespoke event setups —
-            crafted with intention for celebrations that deserve to be
-            remembered. Based in San Antonio, TX.
+            for intimate celebrations and large-scale corporate events alike.
+            Based in San Antonio, TX.
           </p>
           {/* Social icons */}
           <div className="flex gap-4">

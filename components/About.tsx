@@ -113,7 +113,10 @@ export default function About() {
                 go above and beyond for the people they love.
               </p>
               <p>
-                Starting Pop Bestie just made sense. Thank you for being here.
+                Starting Pop Bestie just made sense. That same care now shows
+                up in everything we take on — from backyard birthdays to
+                corporate celebrations across San Antonio. Thank you for being
+                here.
               </p>
             </div>
 

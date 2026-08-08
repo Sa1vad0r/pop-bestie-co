@@ -330,6 +330,16 @@ export default function Contact() {
                     />
                   ))}
                 </div>
+                {selectedEventType === "Corporate Event" && (
+                  <p
+                    className="mt-3 text-text-muted"
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Great — we&apos;ll follow up with custom package options,
+                    capacity planning, invoicing details, and your dedicated
+                    event coordinator.
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -474,7 +484,11 @@ export default function Contact() {
                   50% non-refundable deposit
                 </strong>{" "}
                 is required to secure your package and event date. The remaining
-                balance is due prior to or on the day of setup.
+                balance is due prior to or on the day of setup.{" "}
+                <span className="text-text-primary">
+                  Corporate clients can request itemized invoices and PO-based
+                  billing.
+                </span>
               </p>
             </div>
             <div>

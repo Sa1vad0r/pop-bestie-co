@@ -409,13 +409,79 @@ export default function Services() {
           <Card pkg={luxe3} delay={160} />
         </div>
 
+        {/* ── Corporate & Private Events ─────────────────── */}
+        <div
+          id="corporate"
+          className="reveal grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-8 lg:gap-12 mt-6 p-8 lg:p-10"
+          style={{
+            background: "var(--bg-primary)",
+            border: "1px solid var(--border)",
+            borderLeft: "2px solid var(--accent)",
+          }}
+        >
+          <div>
+            <p
+              className="text-[11px] font-medium tracking-[0.28em] uppercase mb-5"
+              style={{ color: "var(--accent)" }}
+            >
+              Corporate &amp; Private Events
+            </p>
+            <h3
+              className="font-serif text-text-primary leading-[0.95] mb-5"
+              style={{ fontSize: "clamp(1.75rem, 3vw, 2.5rem)" }}
+            >
+              Structured, on-brand,
+              <br className="hidden lg:block" /> and built to scale.
+            </h3>
+            <p
+              className="text-text-muted leading-relaxed"
+              style={{ fontSize: "0.875rem", maxWidth: "34rem" }}
+            >
+              Planning a company party, product launch, or team-building day?
+              We partner with corporate event planners to deliver custom
+              packages sized to your venue and headcount, with formal
+              invoicing, capacity planning, AV-friendly staging, and a
+              dedicated event coordinator managing every detail from first
+              call to load-out.
+            </p>
+          </div>
+          <div className="flex flex-col justify-between">
+            <ul className="space-y-2.5 mb-8">
+              {[
+                "Custom packages for any capacity",
+                "Invoicing & PO-friendly billing",
+                "Dedicated event coordinator",
+                "AV & venue-compatible staging",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-text-muted"
+                  style={{ fontSize: "0.8125rem" }}
+                >
+                  <span className="text-accent mt-[1px]">
+                    <CheckIcon />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase text-accent hover:gap-4 transition-all duration-300 self-start"
+            >
+              Request a Corporate Quote
+              <ArrowIcon />
+            </a>
+          </div>
+        </div>
+
         {/* ── Footer note ──────────────────────────────── */}
         <p
           className="reveal text-center text-text-muted mt-12"
           style={{ fontSize: "0.8rem", letterSpacing: "0.05em" }}
         >
           All packages include setup and breakdown. Travel fees may apply
-          outside the Houston area.
+          outside the San Antonio area.
           <a href="#contact" className="ml-2 text-accent hover:underline">
             Ask us about your location.
           </a>
