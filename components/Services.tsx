@@ -1,3 +1,5 @@
+import Corporate from "@/components/Corporate";
+
 const packages = [
   {
     id: "signature",

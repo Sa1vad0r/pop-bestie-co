@@ -36,6 +36,14 @@ const reviews = [
     text: "10/10. Pop Bestie Co. is amazing and will be our go-to for any future events. The quality and professionalism are unmatched.",
   },
   {
+    name: "Tori Danielle",
+    date: "2025",
+    platform: "Google",
+    text: "10/10 ✨ Pop Bestie Co. is amazing and will be our go-to for any future events!",
+    strengths: [],
+    stars: 5,
+  },
+  {
     name: "Stephanie",
     date: "Dec 2025",
     platform: "Etsy",

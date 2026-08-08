@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 const packages = [
   "The Essential Set Up",
   "The Signature Set Up",
+  "The Corporate Balloon Arch",
   "The Luxe Experience",
   "The Luxe Experience 2.0",
   "The Luxe Experience 3.0",
@@ -490,6 +491,10 @@ export default function Contact() {
                   Corporate clients can request itemized invoices and PO-based
                   billing.
                 </span>
+              </p>
+              <p className="mt-2">
+                Corporate clients receive itemized invoicing and PO-based billing options — see
+                our <a href="#corporate" className="text-brand-pink font-semibold underline">Corporate &amp; Private Events</a> section for details.
               </p>
             </div>
             <div>

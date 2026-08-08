@@ -75,6 +75,9 @@ export default function About() {
                 Founders, Pop Bestie Co.
               </p>
             </div>
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-max px-4 py-2 rounded-full bg-white shadow-md border border-brand-blush text-xs font-semibold text-brand-deep tracking-wide">
+              Nancy &amp; Jalynn, Founders
+            </div>
           </div>
 
           {/* ── Content panel ─────────────────────────────── */}
