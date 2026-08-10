@@ -5,7 +5,7 @@ import { useState } from "react";
 const packages = [
   "The Essential Set Up",
   "The Signature Set Up",
-  "The Corporate Balloon Arch",
+  "The Semi Circle Balloon Arch",
   "The Luxe Experience",
   "The Luxe Experience 2.0",
   "The Luxe Experience 3.0",

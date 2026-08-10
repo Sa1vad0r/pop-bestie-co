@@ -29,15 +29,12 @@ const packages = [
     featured: false,
   },
   {
-    name: "Corporate Balloon Arch",
+    name: "Semi Circle Balloon Arch",
     tagline: "Traditional organic, built for brand events.",
     includes: [
       "Semi-circle traditional organic arch",
       "Up to 3 balloon colors",
-      "Custom balloon foil or logo",
-      "$2M general liability COI issued on request",
-      "W-9 on file, Net 30 terms",
-      "On-time or the install is free",
+      "Custom balloon foils or logo",
     ],
     price: "$525",
     badge: "Corporate",
@@ -52,7 +49,7 @@ const packages = [
       "Custom vinyl lettering",
       "One 3 ft character prop",
     ],
-    price: "$550",
+    price: "$575",
     badge: null,
     featured: false,
   },
@@ -62,11 +59,11 @@ const packages = [
     includes: [
       "7.2 ft wooden backdrop",
       "6.6 ft wooden open ruffle arch",
-      "8 ft garland with flow-through arch design (up to 3 colors)",
+      "8 ft garland with flow-through arch design (up to 3 colors) and 5 ft garland",
       "Custom vinyl lettering",
       "One 3 ft character prop",
     ],
-    price: "$600",
+    price: "$650",
     badge: null,
     featured: false,
   },
@@ -74,13 +71,13 @@ const packages = [
     name: "Luxe 3.0",
     tagline: "The full statement — three arches, seamless.",
     includes: [
-      "Wooden arches: 7.2 ft, 6.6 ft & 6.6 ft open ruffle",
+      "Wooden arches: 7.2 ft, 6.6 ft & 6.6 ft",
       "7.2 ft & 6.6 ft backdrops",
       "7 ft garland left & 8 ft flow-through arch garland (up to 3 colors)",
       "Custom vinyl lettering",
       "One 3 ft character prop",
     ],
-    price: "$700",
+    price: "$1100",
     badge: "Ultimate",
     featured: false,
   },
@@ -350,8 +347,8 @@ export default function Services() {
           className="text-center mt-12 text-sm text-gray-400"
           style={{ letterSpacing: "0.05em" }}
         >
-          All packages include setup and breakdown. Travel fees may apply
-          outside the San Antonio area.
+          * Travel fee will be determined at the time of booking based on the
+          mileage.
           <a href="#contact" className="ml-2 text-brand-pink hover:underline">
             Ask us about your location.
           </a>
