@@ -5,7 +5,8 @@
       "Bash(python -c \"import fitz; print\\('fitz ok'\\)\")",
       "Bash(python -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")",
       "Bash(pip install *)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(npm install *)"
     ]
   }
 }

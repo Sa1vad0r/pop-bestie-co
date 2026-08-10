@@ -9,27 +9,12 @@ const tickerItems = [
   "San Antonio, TX",
 ];
 
-function TickerGroup() {
-  return (
-    <span className="inline-flex">
-      {tickerItems.map((item) => (
-        <span
-          key={item}
-          className="inline-flex items-center gap-5 px-5 text-[10px] font-semibold tracking-[0.25em] uppercase text-brand-deep/70"
-        >
-          {item}
-          <span className="shrink-0 w-[3px] h-[3px] rounded-full bg-brand-pink/70" />
-        </span>
-      ))}
-    </span>
-  );
-}
-
 export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative grain overflow-hidden"
+      style={{ minHeight: "100svh" }}
     >
       {/* Balloon backdrop */}
       <div className="absolute inset-0">
@@ -45,80 +30,163 @@ export default function Hero() {
 
       {/* Gradient overlay */}
       <div
-        className="absolute inset-0"
+        className="relative z-10 flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24"
         style={{
           background:
             "linear-gradient(135deg, rgba(173,20,87,0.85) 0%, rgba(233,30,140,0.75) 40%, rgba(240,98,146,0.65) 75%, rgba(248,187,208,0.55) 100%)",
         }}
-      />
+      >
+        <div className="lg:max-w-[52%]">
+          {/* Eyebrow */}
+          <p
+            className="animate-fade-up text-[11px] font-medium tracking-[0.28em] uppercase mb-10 text-white/70"
+            style={{
+              animationDelay: "0ms",
+            }}
+          >
+            Est. 2024 &nbsp;·&nbsp; San Antonio, TX
+          </p>
 
-      {/* Decorative blobs */}
-      <div
-        className="absolute top-[-80px] left-[-80px] w-80 h-80 rounded-full opacity-30"
-        style={{ background: "radial-gradient(circle, #fff 0%, transparent 70%)" }}
-      />
-      <div
-        className="absolute bottom-[-60px] right-[-60px] w-96 h-96 rounded-full opacity-20"
-        style={{ background: "radial-gradient(circle, #fff 0%, transparent 70%)" }}
-      />
-      <div
-        className="absolute top-1/3 right-[10%] w-48 h-48 rounded-full opacity-15"
-        style={{ background: "radial-gradient(circle, #fff 0%, transparent 70%)" }}
-      />
-      <div
-        className="absolute top-1/4 left-[15%] w-32 h-32 rounded-full opacity-20"
-        style={{ background: "radial-gradient(circle, #fff 0%, transparent 70%)" }}
-      />
+          {/* Headline — white on mobile (over dark image), dark on desktop */}
+          <h1
+            className="font-serif leading-[0.9] mb-8 text-white"
+            style={{ fontSize: "clamp(3.5rem, 5.5vw, 5.75rem)" }}
+          >
+            <span
+              className="block animate-fade-up text-white"
+              style={{ animationDelay: "80ms" }}
+            >
+              Transforming
+            </span>
+            <span
+              className="block animate-fade-up text-white"
+              style={{ animationDelay: "160ms" }}
+            >
+              Parties Into
+            </span>
+            <span
+              className="block animate-fade-up italic"
+              style={{ animationDelay: "240ms", color: "#FFD1EA" }}
+            >
+              Unforgettable
+            </span>
+            <span
+              className="block animate-fade-up text-white"
+              style={{ animationDelay: "320ms" }}
+            >
+              Moments.
+            </span>
+          </h1>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 pb-20 max-w-3xl mx-auto">
-        <p className="text-white/80 text-xs font-semibold tracking-[0.3em] uppercase mb-4">
-          Transforming Parties Into
-        </p>
-        <h1
-          className="text-6xl md:text-8xl text-white mb-8 leading-tight"
-          style={{ fontFamily: "var(--font-dancing-script)" }}
-        >
-          Unforgettable Moments.
-        </h1>
-        <p className="text-white/90 text-lg md:text-xl mb-10 max-w-xl mx-auto">
-          From intimate weekend gatherings to large-scale corporate events, our custom balloon
-          garlands, stunning backdrops, and bespoke setups make hosting effortless — crafted
-          with intention for celebrations that deserve to be remembered.
-        </p>
-        <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
-          <a
-            href="#contact"
-            className="px-8 py-3 rounded-full bg-white text-brand-pink font-semibold text-sm tracking-widest uppercase hover:bg-brand-blush transition-colors"
+          {/* Descriptor */}
+          <p
+            className="animate-fade-up leading-relaxed mb-12 text-white/70"
+            style={{
+              animationDelay: "400ms",
+              fontSize: "0.95rem",
+              maxWidth: "28rem",
+            }}
           >
-            Book Your Event
-          </a>
-          <a
-            href="#services"
-            className="px-8 py-3 rounded-full border-2 border-white text-white font-semibold text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"
+            From intimate weekend gatherings to large-scale corporate events,
+            our custom balloon garlands, stunning backdrops, and bespoke
+            setups make hosting effortless — crafted with intention for
+            celebrations that deserve to be remembered.
+          </p>
+
+          {/* CTAs */}
+          <div
+            className="animate-fade-up flex flex-col sm:flex-row items-start sm:items-center gap-6"
+            style={{ animationDelay: "500ms" }}
           >
-            View Packages
-          </a>
-          <a
-            href="#corporate"
-            className="px-8 py-3 rounded-full border-2 border-white text-white font-semibold text-sm tracking-widest uppercase hover:bg-white/10 transition-colors"
-          >
-            Corporate &amp; Private Events
-          </a>
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-3 px-7 py-3.5 bg-accent text-white text-[11px] font-semibold tracking-[0.2em] uppercase transition-all duration-300 hover:bg-accent/85 hover:gap-4"
+            >
+              Book Your Event
+              <svg
+                className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+            <a
+              href="#services"
+              className="text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 border-b pb-px lg:text-text-muted lg:border-text-muted/25 lg:hover:text-text-primary text-white/70 border-white/30 hover:text-white"
+            >
+              View Packages
+            </a>
+            <a
+              href="#corporate"
+              className="text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 border-b pb-px lg:text-text-muted lg:border-text-muted/25 lg:hover:text-text-primary text-white/70 border-white/30 hover:text-white"
+            >
+              Corporate &amp; Private Events
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Looping ticker */}
+      {/* Scroll indicator — desktop only */}
       <div
-        className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden border-t border-white/30"
+        className="animate-fade-up absolute hidden lg:flex items-center gap-3 z-10"
         style={{
-          background: "rgba(255, 255, 255, 0.9)",
+          animationDelay: "700ms",
+          bottom: "4.5rem",
+          left: "clamp(2rem, 6vw, 6rem)",
+          color: "var(--text-muted)",
+        }}
+      >
+        {/* <div
+          className="w-px h-10"
+          style={{ background: "var(--text-muted)", opacity: 0.3 }}
+        /> */}
+        {/* <span className="text-[10px] tracking-[0.25em] uppercase">Scroll</span> */}
+      </div>
+
+      {/* ── Ticker strip ────────────────────────────────── */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-20 overflow-hidden"
+        style={{
+          background: "rgba(250, 248, 245, 0.88)",
           backdropFilter: "blur(8px)",
+          borderTop: "1px solid var(--border)",
         }}
       >
         <div className="animate-marquee flex whitespace-nowrap py-3.5">
-          <TickerGroup />
-          <TickerGroup />
+          {[0, 1].map((i) => (
+            <span key={i} className="inline-flex">
+              {tickerItems.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center gap-5 px-5"
+                  style={{
+                    fontSize: "10px",
+                    letterSpacing: "0.25em",
+                    textTransform: "uppercase",
+                    color: "var(--text-muted)",
+                  }}
+                >
+                  {item}
+                  <span
+                    className="flex-shrink-0 rounded-full"
+                    style={{
+                      width: "3px",
+                      height: "3px",
+                      background: "var(--accent)",
+                      opacity: 0.7,
+                    }}
+                  />
+                </span>
+              ))}
+            </span>
+          ))}
         </div>
       </div>
     </section>
