@@ -58,10 +58,49 @@ export default function Contact() {
   const [referral, setReferral] = useState<string | null>(null);
   const [payment, setPayment] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+
+    const fd = new FormData(e.currentTarget);
+    const payload = {
+      name: fd.get("name"),
+      phone: fd.get("phone"),
+      email: fd.get("email"),
+      eventDate: fd.get("eventDate"),
+      eventTime: fd.get("eventTime"),
+      eventLocation: fd.get("eventLocation"),
+      eventType: selectedEventType,
+      selectedPackage,
+      theme: fd.get("theme"),
+      colorScheme: fd.get("colorScheme"),
+      vinylText: fd.get("vinylText"),
+      characterProp,
+      characterPropDetails: fd.get("characterPropDetails"),
+      notes: fd.get("notes"),
+      referral,
+      referralOther: fd.get("referralOther"),
+      payment,
+      paymentOther: fd.get("paymentOther"),
+    };
+
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong sending your inquiry. Please try again or reach out to us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -116,16 +155,16 @@ export default function Contact() {
             <div className="space-y-5">
               <div>
                 <label className={labelClass}>Full Name *</label>
-                <input required type="text" placeholder="Jane Smith" className={inputClass} />
+                <input required name="name" type="text" placeholder="Jane Smith" className={inputClass} />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Phone Number *</label>
-                  <input required type="tel" placeholder="(555) 000-0000" className={inputClass} />
+                  <input required name="phone" type="tel" placeholder="(555) 000-0000" className={inputClass} />
                 </div>
                 <div>
                   <label className={labelClass}>Email Address *</label>
-                  <input required type="email" placeholder="you@example.com" className={inputClass} />
+                  <input required name="email" type="email" placeholder="you@example.com" className={inputClass} />
                 </div>
               </div>
             </div>
@@ -138,16 +177,16 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Event Date *</label>
-                  <input required type="date" className={inputClass} />
+                  <input required name="eventDate" type="date" className={inputClass} />
                 </div>
                 <div>
                   <label className={labelClass}>Event Time *</label>
-                  <input required type="time" className={inputClass} />
+                  <input required name="eventTime" type="time" className={inputClass} />
                 </div>
               </div>
               <div>
                 <label className={labelClass}>Event Location / Venue Address *</label>
-                <input required type="text" placeholder="123 Party Lane, City, State" className={inputClass} />
+                <input required name="eventLocation" type="text" placeholder="123 Party Lane, City, State" className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Type of Event *</label>
@@ -205,7 +244,7 @@ export default function Contact() {
             <div className="space-y-5">
               <div>
                 <label className={labelClass}>Theme / Inspiration (optional)</label>
-                <input type="text" placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…" className={inputClass} />
+                <input name="theme" type="text" placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…" className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Upload Inspiration Photo (optional)</label>
@@ -221,11 +260,11 @@ export default function Contact() {
               </div>
               <div>
                 <label className={labelClass}>Color Scheme</label>
-                <input type="text" placeholder="e.g. Hot pink, white & gold" className={inputClass} />
+                <input name="colorScheme" type="text" placeholder="e.g. Hot pink, white & gold" className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Custom Text for Vinyl or Sign</label>
-                <input type="text" placeholder='e.g. "Happy 30th, Sofia!" or "Baby Sofia"' className={inputClass} />
+                <input name="vinylText" type="text" placeholder='e.g. "Happy 30th, Sofia!" or "Baby Sofia"' className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Character Prop Needed?</label>
@@ -246,6 +285,7 @@ export default function Contact() {
                 </div>
                 {characterProp === "yes" && (
                   <input
+                    name="characterPropDetails"
                     type="text"
                     placeholder="Please specify the character"
                     className={`${inputClass} mt-3`}
@@ -262,6 +302,7 @@ export default function Contact() {
               <div>
                 <label className={labelClass}>Special Requests or Important Notes</label>
                 <textarea
+                  name="notes"
                   rows={4}
                   placeholder="Anything else we should know about your event…"
                   className={`${inputClass} resize-none`}
@@ -286,7 +327,7 @@ export default function Contact() {
                   ))}
                 </div>
                 {referral === "Other" && (
-                  <input type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
+                  <input name="referralOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
                 )}
               </div>
             </div>
@@ -332,7 +373,7 @@ export default function Contact() {
                 ))}
               </div>
               {payment === "Other" && (
-                <input type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
+                <input name="paymentOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
               )}
             </div>
             <p className="mt-4 text-xs text-gray-400 leading-relaxed">
@@ -341,11 +382,18 @@ export default function Contact() {
             </p>
           </div>
 
+          {error && (
+            <p className="text-center text-sm text-red-500 bg-red-50 border border-red-100 rounded-xl py-3 px-4">
+              {error}
+            </p>
+          )}
+
           <button
             type="submit"
-            className="w-full py-4 rounded-full bg-brand-pink text-white font-semibold text-sm tracking-widest uppercase hover:bg-brand-deep transition-colors shadow-lg shadow-brand-pink/30"
+            disabled={submitting}
+            className="w-full py-4 rounded-full bg-brand-pink text-white font-semibold text-sm tracking-widest uppercase hover:bg-brand-deep transition-colors shadow-lg shadow-brand-pink/30 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Submit My Inquiry
+            {submitting ? "Sending…" : "Submit My Inquiry"}
           </button>
 
           <p className="text-center text-xs text-gray-400">

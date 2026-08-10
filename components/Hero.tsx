@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const tickerItems = [
   "Balloon Garlands",
   "Custom Backdrops",
@@ -29,12 +31,24 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Gradient background */}
+      {/* Balloon backdrop */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero-balloons.jpg"
+          alt=""
+          fill
+          preload
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+
+      {/* Gradient overlay */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, #ad1457 0%, #e91e8c 40%, #f06292 75%, #f8bbd0 100%)",
+            "linear-gradient(135deg, rgba(173,20,87,0.85) 0%, rgba(233,30,140,0.75) 40%, rgba(240,98,146,0.65) 75%, rgba(248,187,208,0.55) 100%)",
         }}
       />
 
