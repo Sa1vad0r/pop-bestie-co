@@ -16,54 +16,24 @@ export default function Hero() {
       className="relative grain overflow-hidden"
       style={{ minHeight: "100svh" }}
     >
-      {/* ── Mobile: full-bleed photo + overlay ──────────── */}
-      <div className="absolute inset-0 lg:hidden">
+      {/* Balloon backdrop */}
+      <div className="absolute inset-0">
         <Image
           src="/images/hero-balloons.jpg"
           alt=""
           fill
-          priority
-          className="object-cover object-center"
+          preload
           sizes="100vw"
-        />
-        {/* Pink gradient at bottom so light text remains readable */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(122,14,69,0.88) 35%, rgba(176,19,104,0.55) 70%, rgba(233,30,140,0.2) 100%)",
-          }}
+          className="object-cover"
         />
       </div>
 
-      {/* ── Desktop: full image background with overlay for text ────────────────────── */}
-      <div className="hidden lg:block lg:absolute lg:inset-0 overflow-hidden">
-        <Image
-          src="/images/hero-balloons.jpg"
-          alt="Balloon garland event setup by Pop Bestie Co."
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        {/* Semi-transparent pink overlay on left side for text readability */}
-        <div
-          className="absolute inset-y-0 left-0 z-10"
-          style={{
-            width: "56%",
-            background:
-              "linear-gradient(to right, rgba(122,14,69,0.7) 0%, rgba(176,19,104,0.4) 65%, transparent 100%)",
-          }}
-        />
-      </div>
-
-      {/* ── Content ─────────────────────────────────────── */}
+      {/* Gradient overlay */}
       <div
         className="relative z-10 flex flex-col justify-center px-8 sm:px-12 lg:px-16 xl:px-24"
         style={{
-          minHeight: "100svh",
-          paddingTop: "7rem",
-          paddingBottom: "5rem",
+          background:
+            "linear-gradient(135deg, rgba(173,20,87,0.85) 0%, rgba(233,30,140,0.75) 40%, rgba(240,98,146,0.65) 75%, rgba(248,187,208,0.55) 100%)",
         }}
       >
         <div className="lg:max-w-[52%]">

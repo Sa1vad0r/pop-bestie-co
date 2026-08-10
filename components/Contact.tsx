@@ -110,47 +110,48 @@ export default function Contact() {
   const [referral, setReferral] = useState<string | null>(null);
   const [payment, setPayment] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!formRef.current) return;
-    const fd = new FormData(formRef.current);
-    const body = {
-      name: fd.get("name") as string,
-      phone: fd.get("phone") as string,
-      email: fd.get("email") as string,
-      eventDate: fd.get("eventDate") as string,
-      eventTime: fd.get("eventTime") as string,
-      eventLocation: fd.get("eventLocation") as string,
-      eventType: selectedEventType ?? "",
-      selectedPackage: selectedPackage ?? "",
-      theme: fd.get("theme") as string,
-      colorScheme: fd.get("colorScheme") as string,
-      vinylText: fd.get("vinylText") as string,
-      characterProp: characterProp ?? "",
-      characterPropDetails: fd.get("characterPropDetails") as string,
-      notes: fd.get("notes") as string,
-      referral: referral ?? "",
-      referralOther: fd.get("referralOther") as string,
-      payment: payment ?? "",
-      paymentOther: fd.get("paymentOther") as string,
-    };
-    setLoading(true);
     setError(null);
+
+    const fd = new FormData(e.currentTarget);
+    const payload = {
+      name: fd.get("name"),
+      phone: fd.get("phone"),
+      email: fd.get("email"),
+      eventDate: fd.get("eventDate"),
+      eventTime: fd.get("eventTime"),
+      eventLocation: fd.get("eventLocation"),
+      eventType: selectedEventType,
+      selectedPackage,
+      theme: fd.get("theme"),
+      colorScheme: fd.get("colorScheme"),
+      vinylText: fd.get("vinylText"),
+      characterProp,
+      characterPropDetails: fd.get("characterPropDetails"),
+      notes: fd.get("notes"),
+      referral,
+      referralOther: fd.get("referralOther"),
+      payment,
+      paymentOther: fd.get("paymentOther"),
+    };
+
+    setSubmitting(true);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(payload),
       });
-      if (!res.ok) throw new Error("Server error");
+      if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please try again or email us at popbestieco@gmail.com.");
+      setError("Something went wrong sending your inquiry. Please try again or reach out to us directly.");
     } finally {
-      setLoading(false);
+      setSubmitting(false);
     }
   }
 
@@ -246,38 +247,17 @@ export default function Contact() {
             <Divider title="Client Information" />
             <div className="space-y-5">
               <div>
-                <label className={label}>Full Name *</label>
-                <input
-                  required
-                  name="name"
-                  type="text"
-                  placeholder="Jane Smith"
-                  className={`${input} ${inputFocusBorder}`}
-                  style={inputBorder}
-                />
+                <label className={labelClass}>Full Name *</label>
+                <input required name="name" type="text" placeholder="Jane Smith" className={inputClass} />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className={label}>Phone *</label>
-                  <input
-                    required
-                    name="phone"
-                    type="tel"
-                    placeholder="(555) 000-0000"
-                    className={`${input} ${inputFocusBorder}`}
-                    style={inputBorder}
-                  />
+                  <label className={labelClass}>Phone Number *</label>
+                  <input required name="phone" type="tel" placeholder="(555) 000-0000" className={inputClass} />
                 </div>
                 <div>
-                  <label className={label}>Email *</label>
-                  <input
-                    required
-                    name="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    className={`${input} ${inputFocusBorder}`}
-                    style={inputBorder}
-                  />
+                  <label className={labelClass}>Email Address *</label>
+                  <input required name="email" type="email" placeholder="you@example.com" className={inputClass} />
                 </div>
               </div>
             </div>
@@ -289,36 +269,17 @@ export default function Contact() {
             <div className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className={label}>Event Date *</label>
-                  <input
-                    required
-                    name="eventDate"
-                    type="date"
-                    className={`${input} ${inputFocusBorder}`}
-                    style={inputBorder}
-                  />
+                  <label className={labelClass}>Event Date *</label>
+                  <input required name="eventDate" type="date" className={inputClass} />
                 </div>
                 <div>
-                  <label className={label}>Event Time *</label>
-                  <input
-                    required
-                    name="eventTime"
-                    type="time"
-                    className={`${input} ${inputFocusBorder}`}
-                    style={inputBorder}
-                  />
+                  <label className={labelClass}>Event Time *</label>
+                  <input required name="eventTime" type="time" className={inputClass} />
                 </div>
               </div>
               <div>
-                <label className={label}>Venue / Address *</label>
-                <input
-                  required
-                  name="eventLocation"
-                  type="text"
-                  placeholder="123 Party Lane, San Antonio, TX"
-                  className={`${input} ${inputFocusBorder}`}
-                  style={inputBorder}
-                />
+                <label className={labelClass}>Event Location / Venue Address *</label>
+                <input required name="eventLocation" type="text" placeholder="123 Party Lane, City, State" className={inputClass} />
               </div>
               <div>
                 <label className={label}>Type of Event *</label>
@@ -369,34 +330,28 @@ export default function Contact() {
             <Divider title="Design Preferences" />
             <div className="space-y-5">
               <div>
-                <label className={label}>Theme / Inspiration</label>
-                <input
-                  name="theme"
-                  type="text"
-                  placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…"
-                  className={`${input} ${inputFocusBorder}`}
-                  style={inputBorder}
-                />
+                <label className={labelClass}>Theme / Inspiration (optional)</label>
+                <input name="theme" type="text" placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…" className={inputClass} />
               </div>
               <div>
-                <label className={label}>Color Scheme</label>
-                <input
-                  name="colorScheme"
-                  type="text"
-                  placeholder="e.g. Hot pink, white & gold"
-                  className={`${input} ${inputFocusBorder}`}
-                  style={inputBorder}
-                />
+                <label className={labelClass}>Upload Inspiration Photo (optional)</label>
+                <div className="w-full rounded-xl border-2 border-dashed border-gray-200 hover:border-brand-pink transition-colors p-6 text-center cursor-pointer">
+                  <input type="file" accept="image/*" className="hidden" id="inspo-upload" />
+                  <label htmlFor="inspo-upload" className="cursor-pointer">
+                    <svg className="w-8 h-8 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <p className="text-sm text-gray-400">Click to upload a photo</p>
+                  </label>
+                </div>
               </div>
               <div>
-                <label className={label}>Custom Vinyl / Sign Text</label>
-                <input
-                  name="vinylText"
-                  type="text"
-                  placeholder='"Happy 30th, Sofia!" or "Baby Sofia"'
-                  className={`${input} ${inputFocusBorder}`}
-                  style={inputBorder}
-                />
+                <label className={labelClass}>Color Scheme</label>
+                <input name="colorScheme" type="text" placeholder="e.g. Hot pink, white & gold" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Custom Text for Vinyl or Sign</label>
+                <input name="vinylText" type="text" placeholder='e.g. "Happy 30th, Sofia!" or "Baby Sofia"' className={inputClass} />
               </div>
               <div>
                 <label className={label}>Character Prop Needed?</label>
@@ -450,13 +405,7 @@ export default function Contact() {
                   ))}
                 </div>
                 {referral === "Other" && (
-                  <input
-                    name="referralOther"
-                    type="text"
-                    placeholder="Please specify"
-                    className={`${input} ${inputFocusBorder} mt-3`}
-                    style={inputBorder}
-                  />
+                  <input name="referralOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
                 )}
               </div>
             </div>
@@ -510,34 +459,23 @@ export default function Contact() {
                 ))}
               </div>
               {payment === "Other" && (
-                <input
-                  name="paymentOther"
-                  type="text"
-                  placeholder="Please specify"
-                  className={`${input} ${inputFocusBorder} mt-3`}
-                  style={inputBorder}
-                />
+                <input name="paymentOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
               )}
             </div>
           </div>
 
-          {/* Error */}
           {error && (
-            <p className="text-sm" style={{ color: "#c0392b" }}>
+            <p className="text-center text-sm text-red-500 bg-red-50 border border-red-100 rounded-xl py-3 px-4">
               {error}
             </p>
           )}
 
-          {/* Submit */}
           <button
             type="submit"
-            disabled={loading}
-            className="w-full py-4 text-white text-[11px] font-semibold tracking-[0.25em] uppercase transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{
-              background: loading ? "var(--text-muted)" : "var(--accent)",
-            }}
+            disabled={submitting}
+            className="w-full py-4 rounded-full bg-brand-pink text-white font-semibold text-sm tracking-widest uppercase hover:bg-brand-deep transition-colors shadow-lg shadow-brand-pink/30 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {loading ? "Sending…" : "Submit My Inquiry"}
+            {submitting ? "Sending…" : "Submit My Inquiry"}
           </button>
 
           <p

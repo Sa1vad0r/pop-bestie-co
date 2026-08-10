@@ -7,9 +7,9 @@ const packages = [
     label: "Most Popular",
     tagline: "A refined design that blends elegance with personality.",
     description:
-      "Includes a 7.2 ft or 6.6 ft wooden backdrop in your chosen color, paired with balloon garlands on both sides. Styled in up to three colors with custom vinyl lettering, plus a 3 ft character prop for a standout detail.",
+      "Includes a 6.6 ft wooden backdrop in your chosen color, paired with balloon garlands on both sides. Styled in up to three colors with custom vinyl lettering, plus a 3 ft character prop for a standout detail.",
     includes: [
-      "7.2 ft or 6.6 ft wooden backdrop",
+      "6.6 ft wooden backdrop",
       "Full garland left & half garland right (up to 3 colors)",
       "Custom vinyl lettering",
       "One 3 ft character prop",
@@ -25,7 +25,7 @@ const packages = [
     description:
       "A 7.2 ft or 6.6 ft wooden backdrop with garlands on both sides in up to three colors and custom vinyl lettering.",
     includes: [
-      "7.2 ft or 6.6 ft wooden backdrop",
+      "6.6 ft wooden backdrop",
       "Full garland left & half garland right (up to 3 colors)",
       "Custom vinyl lettering",
     ],
@@ -105,6 +105,12 @@ const packages = [
 const corporateTower = {
   id: "corporate-towers",
   name: "Balloon Towers",
+  includes: [
+    "6 ft tall",
+    "Customized with logo",
+    "Up to 3 balloon colors",
+    "Streamer colors of your choice",
+  ],
   price: "$150",
   includes: [
     "6 ft tall",
@@ -118,11 +124,11 @@ const corporateTower = {
 function CheckIcon() {
   return (
     <svg
-      className="flex-shrink-0 mt-[3px]"
       width="12"
       height="12"
       viewBox="0 0 12 12"
       fill="none"
+      className="shrink-0 mt-0.75"
     >
       <path
         d="M2 6l3 3 5-5"
@@ -148,7 +154,7 @@ function ArrowIcon() {
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={1.5}
+        strokeWidth="1.5"
         d="M17 8l4 4m0 0l-4 4m4-4H3"
       />
     </svg>
@@ -371,19 +377,20 @@ export default function Services() {
               What We Offer
             </p>
             <h2
-              className="reveal font-serif text-text-primary leading-[0.9]"
-              style={{ fontSize: "clamp(3rem, 5vw, 5rem)" }}
+              className="text-brand-deep leading-[0.95]"
+              style={{
+                fontFamily: "var(--font-dancing-script)",
+                fontSize: "clamp(3rem, 5vw, 4.5rem)",
+              }}
             >
-              Every setup,
-              <br />
-              <span className="italic text-text-muted">built for your</span>
-              <br />
+              Every setup,{" "}
+              <span className="text-gray-400 italic">built for your</span>{" "}
               moment.
             </h2>
           </div>
           <div className="flex flex-col justify-end">
             <p
-              className="reveal text-text-muted leading-relaxed mb-6"
+              className="text-gray-500 leading-relaxed mb-6"
               style={{ fontSize: "0.9rem", maxWidth: "28rem" }}
             >
               Every package is fully customizable — colors, lettering, and props
@@ -408,19 +415,124 @@ export default function Services() {
           Row 3:   [Luxe]  [Luxe 2.0]  [Luxe 3.0]
         */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 auto-rows-auto">
-          {/* Signature — featured, 2×2 */}
-          <FeaturedCard pkg={signature} />
-
-          {/* Essential */}
-          <Card pkg={essential} delay={80} />
-
-          {/* Corporate Balloon Arch */}
-          <Card pkg={corporateArch} delay={160} />
-
-          {/* Luxe row */}
-          <Card pkg={luxe} delay={0} />
-          <Card pkg={luxe2} delay={80} />
-          <Card pkg={luxe3} delay={160} />
+          {packages.map((pkg) =>
+            pkg.featured ? (
+              <div
+                key={pkg.name}
+                className="relative flex flex-col col-span-1 md:col-span-2 md:row-span-2 p-8 lg:p-10 overflow-hidden rounded-2xl"
+                style={{
+                  background:
+                    "linear-gradient(160deg, var(--color-brand-pink) 0%, var(--color-brand-deep) 100%)",
+                }}
+              >
+                <div className="flex items-center gap-3 mb-6 relative z-10">
+                  <span className="text-[10px] font-semibold tracking-[0.25em] uppercase px-3 py-1.5 rounded-full bg-brand-deep text-white">
+                    {pkg.badge}
+                  </span>
+                </div>
+                <div className="relative z-10 mb-6">
+                  <h3
+                    className="text-white leading-none mb-2"
+                    style={{
+                      fontFamily: "var(--font-dancing-script)",
+                      fontSize: "clamp(2.75rem, 4vw, 4rem)",
+                    }}
+                  >
+                    {pkg.name}
+                  </h3>
+                  <p className="italic text-sm text-white/80">{pkg.tagline}</p>
+                </div>
+                <p
+                  className="relative z-10 leading-relaxed mb-8 text-sm text-white/90"
+                  style={{ maxWidth: "38rem" }}
+                >
+                  {pkg.description}
+                </p>
+                <div className="relative z-10 w-10 h-px mb-6 bg-white/30" />
+                <ul className="relative z-10 space-y-2.5 mb-auto">
+                  {pkg.includes.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm text-white/90"
+                    >
+                      <span className="text-white mt-0.5">
+                        <Check />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="relative z-10 flex items-end justify-between mt-10 pt-6 border-t border-white/25">
+                  <div>
+                    <p className="text-[10px] tracking-[0.2em] uppercase mb-1 text-white/70">
+                      Starting at
+                    </p>
+                    <p className="text-4xl font-bold text-white">{pkg.price}</p>
+                  </div>
+                  <a
+                    href="#contact"
+                    className="group inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.18em] uppercase px-5 py-3 rounded-full bg-white text-brand-deep hover:bg-brand-blush hover:gap-4 transition-all duration-300"
+                  >
+                    Book This Setup
+                    <ArrowIcon />
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div
+                key={pkg.name}
+                className="relative flex flex-col p-7 rounded-2xl bg-brand-soft border border-brand-blush hover:shadow-lg hover:shadow-brand-pink/10 transition-shadow duration-300"
+              >
+                {pkg.badge && (
+                  <span className="self-start mb-4 text-[10px] font-semibold tracking-[0.25em] uppercase px-2.5 py-1 rounded-full text-brand-pink bg-brand-blush border border-brand-pink/20">
+                    {pkg.badge}
+                  </span>
+                )}
+                <h3
+                  className="text-brand-deep leading-none mb-1"
+                  style={{
+                    fontFamily: "var(--font-dancing-script)",
+                    fontSize: "2rem",
+                  }}
+                >
+                  {pkg.name}
+                </h3>
+                <p className="italic text-sm text-gray-500 mb-5">
+                  {pkg.tagline}
+                </p>
+                <ul className="space-y-2 mb-auto">
+                  {pkg.includes.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm text-gray-600"
+                    >
+                      <span className="text-brand-pink mt-0.5">
+                        <Check />
+                      </span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex items-end justify-between mt-6 pt-5 border-t border-brand-blush">
+                  <div>
+                    <p className="text-[10px] tracking-[0.2em] uppercase mb-0.5 text-gray-400">
+                      From
+                    </p>
+                    <p className="text-3xl font-bold text-brand-deep">
+                      {pkg.price}
+                    </p>
+                  </div>
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.18em] uppercase px-4 py-2.5 rounded-full bg-brand-pink text-white hover:bg-brand-deep transition-colors duration-300"
+                  >
+                    Book
+                    <ArrowIcon />
+                  </a>
+                </div>
+              </div>
+            ),
+          )}
         </div>
 
         {/* ── Corporate & Private Events ─────────────────── */}
@@ -499,20 +611,22 @@ export default function Services() {
         >
           <div>
             <h4
-              className="font-serif italic text-[#B01368] mb-2"
-              style={{ fontSize: "1.5rem" }}
+              className="text-brand-deep mb-2"
+              style={{
+                fontFamily: "var(--font-dancing-script)",
+                fontSize: "1.75rem",
+              }}
             >
               {corporateTower.name}
             </h4>
             <ul className="flex flex-wrap gap-x-6 gap-y-1.5">
-              {corporateTower.includes.map((item) => (
+              {balloonTowers.includes.map((item) => (
                 <li
                   key={item}
-                  className="flex items-center gap-2 text-text-muted"
-                  style={{ fontSize: "0.8rem" }}
+                  className="flex items-center gap-2 text-sm text-gray-600"
                 >
-                  <span className="text-accent">
-                    <CheckIcon />
+                  <span className="text-brand-pink">
+                    <Check />
                   </span>
                   {item}
                 </li>
@@ -521,14 +635,11 @@ export default function Services() {
           </div>
           <div className="flex items-center gap-6">
             <div>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-0.5">
+              <p className="text-[10px] tracking-[0.2em] uppercase mb-0.5 text-gray-400">
                 From
               </p>
-              <p
-                className="font-serif text-text-primary"
-                style={{ fontSize: "2rem", lineHeight: 1 }}
-              >
-                {corporateTower.price}
+              <p className="text-3xl font-bold text-brand-deep">
+                {balloonTowers.price}
               </p>
             </div>
             <a
@@ -542,14 +653,13 @@ export default function Services() {
           </div>
         </div>
 
-        {/* ── Footer note ──────────────────────────────── */}
         <p
-          className="reveal text-center text-text-muted mt-12"
-          style={{ fontSize: "0.8rem", letterSpacing: "0.05em" }}
+          className="text-center mt-12 text-sm text-gray-400"
+          style={{ letterSpacing: "0.05em" }}
         >
           All packages include setup and breakdown. Travel fees may apply
           outside the San Antonio area.
-          <a href="#contact" className="ml-2 text-accent hover:underline">
+          <a href="#contact" className="ml-2 text-brand-pink hover:underline">
             Ask us about your location.
           </a>
         </p>
