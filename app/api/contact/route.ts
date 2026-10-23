@@ -95,7 +95,7 @@ function escapeHtml(s: string) {
 
 function row(label: string, value: string | undefined) {
   if (!value) return "";
-  return `<tr>...${escapeHtml(value)}...</tr>`;
+  return `<tr><td style="padding:8px 12px;color:#9b7fa6;font-size:13px;white-space:nowrap;vertical-align:top">${label}</td><td style="padding:8px 12px;color:#2d1b35;font-size:13px">${escapeHtml(value)}</td></tr>`;
 }
 
 function buildBusinessEmail(d: Record<string, string>) {
@@ -159,7 +159,7 @@ function buildCustomerEmail(name: string) {
     </div>
     <div style="padding:36px 32px;text-align:center">
       <div style="font-size:48px;margin-bottom:16px">🎈</div>
-      <h2 style="margin:0 0 12px;color:#2d1b35;font-size:22px">Hey ${name}!</h2>
+      <h2 style="margin:0 0 12px;color:#2d1b35;font-size:22px">Hey ${escapeHtml(name)}!</h2>
       <p style="margin:0 0 20px;color:#6b5060;font-size:15px;line-height:1.7">
         We got your inquiry and we are SO excited to hear about your event!
         Our team is currently reviewing your details and will be in touch within
