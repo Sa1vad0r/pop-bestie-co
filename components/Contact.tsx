@@ -21,7 +21,13 @@ const eventTypes = [
   "Other",
 ];
 
-const referralSources = ["Instagram", "Facebook", "Google", "Referral", "Other"];
+const referralSources = [
+  "Instagram",
+  "Facebook",
+  "Google",
+  "Referral",
+  "Other",
+];
 
 const paymentMethods = [
   "Card (Stripe / Square / Website Checkout)",
@@ -34,7 +40,8 @@ const paymentMethods = [
 const inputClass =
   "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 placeholder:text-gray-300 focus:outline-none focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 transition";
 
-const labelClass = "block text-xs font-semibold tracking-wide text-gray-500 uppercase mb-1.5";
+const labelClass =
+  "block text-xs font-semibold tracking-wide text-gray-500 uppercase mb-1.5";
 
 function SectionHeader({ children }: { children: React.ReactNode }) {
   return (
@@ -53,19 +60,51 @@ function SectionHeader({ children }: { children: React.ReactNode }) {
 
 export default function Contact() {
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
-  const [selectedEventType, setSelectedEventType] = useState<string | null>(null);
+  const [selectedEventType, setSelectedEventType] = useState<string | null>(
+    null,
+  );
   const [characterProp, setCharacterProp] = useState<"yes" | "no" | null>(null);
   const [referral, setReferral] = useState<string | null>(null);
   const [payment, setPayment] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [inspoImage, setInspoImage] = useState<File | null>(null);
+
+  const MAX_IMAGE_BYTES = 3 * 1024 * 1024;
+
+  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0] ?? null;
+    if (file && file.size > MAX_IMAGE_BYTES) {
+      setError("Inspiration photo must be smaller than 3MB.");
+      e.target.value = "";
+      setInspoImage(null);
+      return;
+    }
+    setError(null);
+    setInspoImage(file);
+  }
+
+  async function fileToBase64(file: File): Promise<string> {
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    let binary = "";
+    for (let i = 0; i < bytes.byteLength; i++)
+      binary += String.fromCharCode(bytes[i]);
+    return btoa(binary);
+  }
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
 
     const fd = new FormData(e.currentTarget);
+    const image = inspoImage
+      ? {
+          filename: inspoImage.name,
+          contentType: inspoImage.type,
+          content: await fileToBase64(inspoImage),
+        }
+      : null;
     const payload = {
       name: fd.get("name"),
       phone: fd.get("phone"),
@@ -85,6 +124,7 @@ export default function Contact() {
       referralOther: fd.get("referralOther"),
       payment,
       paymentOther: fd.get("paymentOther"),
+      image,
     };
 
     setSubmitting(true);
@@ -97,7 +137,9 @@ export default function Contact() {
       if (!res.ok) throw new Error("Request failed");
       setSubmitted(true);
     } catch {
-      setError("Something went wrong sending your inquiry. Please try again or reach out to us directly.");
+      setError(
+        "Something went wrong sending your inquiry. Please try again or reach out to us directly.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -108,8 +150,18 @@ export default function Contact() {
       <section id="contact" className="py-24 bg-brand-soft">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <div className="w-20 h-20 rounded-full bg-brand-pink/10 flex items-center justify-center mx-auto mb-6">
-            <svg className="w-10 h-10 text-brand-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              className="w-10 h-10 text-brand-pink"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
           <h2
@@ -119,9 +171,9 @@ export default function Contact() {
             We&apos;ve Got Your Inquiry!
           </h2>
           <p className="text-gray-500">
-            Thank you for reaching out to Pop Bestie Co.! We&apos;ll review your inquiry and
-            contact you within <strong>24–48 business hours</strong> to confirm availability and
-            next steps.
+            Thank you for reaching out to Pop Bestie Co.! We&apos;ll review your
+            inquiry and contact you within <strong>24–48 business hours</strong>{" "}
+            to confirm availability and next steps.
           </p>
         </div>
       </section>
@@ -141,8 +193,9 @@ export default function Contact() {
           Event Inquiry Form
         </h2>
         <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
-          We&apos;re excited to bring your vision to life. Please complete the form below with as
-          much detail as possible so we can curate the perfect setup for your event.
+          We&apos;re excited to bring your vision to life. Please complete the
+          form below with as much detail as possible so we can curate the
+          perfect setup for your event.
         </p>
 
         <form
@@ -155,16 +208,34 @@ export default function Contact() {
             <div className="space-y-5">
               <div>
                 <label className={labelClass}>Full Name *</label>
-                <input required name="name" type="text" placeholder="Jane Smith" className={inputClass} />
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Jane Smith"
+                  className={inputClass}
+                />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Phone Number *</label>
-                  <input required name="phone" type="tel" placeholder="(555) 000-0000" className={inputClass} />
+                  <input
+                    required
+                    name="phone"
+                    type="tel"
+                    placeholder="(555) 000-0000"
+                    className={inputClass}
+                  />
                 </div>
                 <div>
                   <label className={labelClass}>Email Address *</label>
-                  <input required name="email" type="email" placeholder="you@example.com" className={inputClass} />
+                  <input
+                    required
+                    name="email"
+                    type="email"
+                    placeholder="you@example.com"
+                    className={inputClass}
+                  />
                 </div>
               </div>
             </div>
@@ -177,16 +248,34 @@ export default function Contact() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Event Date *</label>
-                  <input required name="eventDate" type="date" className={inputClass} />
+                  <input
+                    required
+                    name="eventDate"
+                    type="date"
+                    className={inputClass}
+                  />
                 </div>
                 <div>
                   <label className={labelClass}>Event Time *</label>
-                  <input required name="eventTime" type="time" className={inputClass} />
+                  <input
+                    required
+                    name="eventTime"
+                    type="time"
+                    className={inputClass}
+                  />
                 </div>
               </div>
               <div>
-                <label className={labelClass}>Event Location / Venue Address *</label>
-                <input required name="eventLocation" type="text" placeholder="123 Party Lane, City, State" className={inputClass} />
+                <label className={labelClass}>
+                  Event Location / Venue Address *
+                </label>
+                <input
+                  required
+                  name="eventLocation"
+                  type="text"
+                  placeholder="123 Party Lane, City, State"
+                  className={inputClass}
+                />
               </div>
               <div>
                 <label className={labelClass}>Type of Event *</label>
@@ -213,7 +302,9 @@ export default function Contact() {
           {/* Package Selection */}
           <div>
             <SectionHeader>Package Selection</SectionHeader>
-            <label className={labelClass}>Which package are you interested in?</label>
+            <label className={labelClass}>
+              Which package are you interested in?
+            </label>
             <div className="space-y-2">
               {packages.map((pkg) => (
                 <label
@@ -243,34 +334,81 @@ export default function Contact() {
             <SectionHeader>Design Preferences</SectionHeader>
             <div className="space-y-5">
               <div>
-                <label className={labelClass}>Theme / Inspiration (optional)</label>
-                <input name="theme" type="text" placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…" className={inputClass} />
+                <label className={labelClass}>
+                  Theme / Inspiration (optional)
+                </label>
+                <input
+                  name="theme"
+                  type="text"
+                  placeholder="e.g. Disco Cowgirl, Under the Sea, Hello Kitty…"
+                  className={inputClass}
+                />
               </div>
               <div>
-                <label className={labelClass}>Upload Inspiration Photo (optional)</label>
+                <label className={labelClass}>
+                  Upload Inspiration Photo (optional)
+                </label>
                 <div className="w-full rounded-xl border-2 border-dashed border-gray-200 hover:border-brand-pink transition-colors p-6 text-center cursor-pointer">
-                  <input type="file" accept="image/*" className="hidden" id="inspo-upload" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    id="inspo-upload"
+                    name="inspirationPhoto"
+                    onChange={handleImageChange}
+                  />
                   <label htmlFor="inspo-upload" className="cursor-pointer">
-                    <svg className="w-8 h-8 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <svg
+                      className={`w-8 h-8 mx-auto mb-2 ${
+                        inspoImage ? "text-brand-pink" : "text-gray-300"
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
                     </svg>
-                    <p className="text-sm text-gray-400">Click to upload a photo</p>
+                    <p
+                      className={`text-sm ${inspoImage ? "text-brand-pink" : "text-gray-400"}`}
+                    >
+                      {inspoImage ? inspoImage.name : "Click to upload a photo"}
+                    </p>
                   </label>
                 </div>
               </div>
               <div>
                 <label className={labelClass}>Color Scheme</label>
-                <input name="colorScheme" type="text" placeholder="e.g. Hot pink, white & gold" className={inputClass} />
+                <input
+                  name="colorScheme"
+                  type="text"
+                  placeholder="e.g. Hot pink, white & gold"
+                  className={inputClass}
+                />
               </div>
               <div>
-                <label className={labelClass}>Custom Text for Vinyl or Sign</label>
-                <input name="vinylText" type="text" placeholder='e.g. "Happy 30th, Sofia!" or "Baby Sofia"' className={inputClass} />
+                <label className={labelClass}>
+                  Custom Text for Vinyl or Sign
+                </label>
+                <input
+                  name="vinylText"
+                  type="text"
+                  placeholder='e.g. "Happy 30th, Sofia!" or "Baby Sofia"'
+                  className={inputClass}
+                />
               </div>
               <div>
                 <label className={labelClass}>Character Prop Needed?</label>
                 <div className="flex gap-4">
                   {(["yes", "no"] as const).map((v) => (
-                    <label key={v} className="flex items-center gap-2 cursor-pointer">
+                    <label
+                      key={v}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
                       <input
                         type="radio"
                         name="character-prop"
@@ -279,7 +417,9 @@ export default function Contact() {
                         onChange={() => setCharacterProp(v)}
                         className="accent-brand-pink"
                       />
-                      <span className="text-sm text-gray-700 capitalize">{v}</span>
+                      <span className="text-sm text-gray-700 capitalize">
+                        {v}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -300,7 +440,9 @@ export default function Contact() {
             <SectionHeader>Additional Details</SectionHeader>
             <div className="space-y-5">
               <div>
-                <label className={labelClass}>Special Requests or Important Notes</label>
+                <label className={labelClass}>
+                  Special Requests or Important Notes
+                </label>
                 <textarea
                   name="notes"
                   rows={4}
@@ -327,7 +469,12 @@ export default function Contact() {
                   ))}
                 </div>
                 {referral === "Other" && (
-                  <input name="referralOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
+                  <input
+                    name="referralOther"
+                    type="text"
+                    placeholder="Please specify"
+                    className={`${inputClass} mt-3`}
+                  />
                 )}
               </div>
             </div>
@@ -337,15 +484,25 @@ export default function Contact() {
           <div>
             <SectionHeader>Reservation &amp; Payment</SectionHeader>
             <div className="bg-brand-blush rounded-2xl p-5 mb-6 text-sm text-gray-600 leading-relaxed">
-              <p className="font-semibold text-brand-deep mb-1">Deposit Policy</p>
+              <p className="font-semibold text-brand-deep mb-1">
+                Deposit Policy
+              </p>
               <p>
-                A <strong>50% non-refundable deposit</strong> is required to secure your selected
-                package and event date. The remaining balance is due prior to or on the day of
-                setup. Service will not begin until the full balance has been received.
+                A <strong>50% non-refundable deposit</strong> is required to
+                secure your selected package and event date. The remaining
+                balance is due prior to or on the day of setup. Service will not
+                begin until the full balance has been received.
               </p>
               <p className="mt-2">
-                Corporate clients receive itemized invoicing and PO-based billing options — see
-                our <a href="#corporate" className="text-brand-pink font-semibold underline">Corporate &amp; Private Events</a> section for details.
+                Corporate clients receive itemized invoicing and PO-based
+                billing options — see our{" "}
+                <a
+                  href="#corporate"
+                  className="text-brand-pink font-semibold underline"
+                >
+                  Corporate &amp; Private Events
+                </a>{" "}
+                section for details.
               </p>
             </div>
             <div>
@@ -373,12 +530,18 @@ export default function Contact() {
                 ))}
               </div>
               {payment === "Other" && (
-                <input name="paymentOther" type="text" placeholder="Please specify" className={`${inputClass} mt-3`} />
+                <input
+                  name="paymentOther"
+                  type="text"
+                  placeholder="Please specify"
+                  className={`${inputClass} mt-3`}
+                />
               )}
             </div>
             <p className="mt-4 text-xs text-gray-400 leading-relaxed">
-              Once your inquiry is reviewed and your date is confirmed, you will receive an invoice
-              with a secure payment link to complete your deposit.
+              Once your inquiry is reviewed and your date is confirmed, you will
+              receive an invoice with a secure payment link to complete your
+              deposit.
             </p>
           </div>
 
@@ -397,7 +560,8 @@ export default function Contact() {
           </button>
 
           <p className="text-center text-xs text-gray-400">
-            We&apos;ll be in touch within 24–48 business hours to confirm availability and next steps.
+            We&apos;ll be in touch within 24–48 business hours to confirm
+            availability and next steps.
           </p>
         </form>
       </div>

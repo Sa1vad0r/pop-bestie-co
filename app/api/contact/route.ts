@@ -28,7 +28,19 @@ export async function POST(req: NextRequest) {
     referralOther,
     payment,
     paymentOther,
+    image,
   } = data;
+
+  const attachments =
+    image?.content && image?.filename
+      ? [
+          {
+            filename: image.filename,
+            content: image.content,
+            contentType: image.contentType,
+          },
+        ]
+      : undefined;
 
   try {
     const [businessResult, customerResult] = await Promise.all([
@@ -37,6 +49,7 @@ export async function POST(req: NextRequest) {
         to: BUSINESS_EMAIL,
         subject: `New Inquiry — ${name} | ${eventType || "Event"} on ${eventDate || "TBD"}`,
         html: buildBusinessEmail(data),
+        attachments,
       }),
       resend.emails.send({
         from: FROM,
@@ -48,22 +61,41 @@ export async function POST(req: NextRequest) {
 
     if (businessResult.error) {
       console.error("Business email failed:", businessResult.error);
-      return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Failed to send email" },
+        { status: 500 },
+      );
     }
     if (customerResult.error) {
-      console.error("Customer confirmation email failed:", customerResult.error);
+      console.error(
+        "Customer confirmation email failed:",
+        customerResult.error,
+      );
     }
 
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error("Email send error:", err);
-    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 },
+    );
   }
+}
+
+function escapeHtml(s: string) {
+  return s.replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ]!,
+  );
 }
 
 function row(label: string, value: string | undefined) {
   if (!value) return "";
-  return `<tr><td style="padding:8px 12px;color:#9b7fa6;font-size:13px;white-space:nowrap;vertical-align:top">${label}</td><td style="padding:8px 12px;color:#2d1b35;font-size:13px">${value}</td></tr>`;
+  return `<tr>...${escapeHtml(value)}...</tr>`;
 }
 
 function buildBusinessEmail(d: Record<string, string>) {
